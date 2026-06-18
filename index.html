@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Leaf &amp; Lipstick — Natural Garden Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1a4d2e;--green-light:#2d9659;--green-pale:#d8f3dc;
+  --pink:#d4547a;--pink-light:#f4a5b0;--pink-pale:#fce4e8;
+  --cream:#fffbf7;--text:#0d1b14;--muted:#5a6b62;
+  --gold:#d4af37;--radius:16px;--max:480px;
+  --shadow:0 20px 60px rgba(26,77,46,0.15);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;background:linear-gradient(135deg, #fffbf7 0%, #f5faf8 100%);
+  color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;letter-spacing:0.02em}
+.app{max-width:var(--max);margin:0 auto;min-height:100vh;position:relative;background:linear-gradient(180deg, #fffbf7 0%, #f9f6f4 50%, #f0ede8 100%);box-shadow:0 0 80px rgba(26,77,46,0.08)}
+
+/* ───────────────────────── CINEMATIC HERO ───────────────────────── */
+.cinehero{position:relative;width:100%;overflow:hidden;min-height:780px;background:#0d1b14}
+
+.cinehero-slide{
+  position:absolute;inset:0;background-size:cover;background-position:center 28%;
+  opacity:0;transition:opacity 1.8s cubic-bezier(.45,0,.2,1);will-change:opacity;
+}
+.cinehero-slide.is-active{opacity:1}
+.cinehero-slide.slide-1{background-image:url('assets/hero-forest-woman.jpg');background-position:78% 18%}
+.cinehero-slide.slide-2{background-image:url('assets/hero-leaves-lipstick.jpg');background-position:center 38%}
+.cinehero-slide.slide-3{background-image:url('assets/hero-lipstick-orchard.jpg');background-position:center 62%}
+
+.cinehero-grain{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:overlay;opacity:0.5;
+  background-image:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 0, transparent 45%),radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04) 0, transparent 50%);
+}
+.cinehero-overlay{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:
+    radial-gradient(ellipse 100% 55% at 50% 38%, rgba(13,27,20,0.78) 0%, rgba(13,27,20,0.42) 55%, transparent 100%),
+    linear-gradient(180deg, rgba(13,27,20,0.62) 0%, rgba(13,27,20,0.22) 16%, rgba(13,27,20,0.3) 55%, rgba(13,27,20,0.94) 100%);
+}
+
+/* glassmorphic nav over the photography */
+.cinehero-nav{
+  position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;
+  padding:22px 22px 16px;
+}
+.cinehero-logo{
+  font-family:'Cormorant Garamond',serif;font-size:1.55rem;letter-spacing:0.01em;color:#fffbf7;
+  cursor:pointer;display:flex;align-items:baseline;gap:2px;
+}
+.cinehero-logo .amp{color:var(--pink-light);font-style:italic;font-size:1.2rem;padding:0 2px}
+.cinehero-nav-cta{
+  font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:#fffbf7;background:rgba(255,251,247,0.12);border:1px solid rgba(255,251,247,0.35);
+  padding:9px 18px;border-radius:50px;cursor:pointer;backdrop-filter:blur(8px);
+  transition:transform 0.3s cubic-bezier(.34,.1,.68,.55), background 0.3s;
+}
+.cinehero-nav-cta:hover{background:rgba(255,251,247,0.92);color:var(--green);transform:scale(1.04)}
+
+/* hero copy block */
+.cinehero-body{
+  position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:48px 26px 0;min-height:560px;justify-content:center;
+}
+.cinehero-eyebrow{
+  font-size:0.66rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--pink-light);
+  font-weight:600;margin-bottom:18px;opacity:0.95;text-shadow:0 2px 12px rgba(0,0,0,0.45);
+}
+.cinehero-eyebrow::before{content:'✦ ';color:var(--gold)}
+.cinehero-headline{
+  font-family:'Cormorant Garamond',serif;font-weight:400;color:#fffbf7;
+  font-size:2.55rem;line-height:1.05;letter-spacing:-0.01em;max-width:340px;
+  text-shadow:0 4px 24px rgba(0,0,0,0.35);
+}
+.cinehero-headline em{font-style:italic;color:var(--pink-light)}
+.cinehero-sub{
+  font-family:'DM Sans',sans-serif;color:rgba(255,251,247,0.78);font-size:0.96rem;
+  line-height:1.7;max-width:300px;margin:18px auto 0;
+}
+.cinehero-cta-row{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:32px;width:100%}
+.cinehero-cta{
+  font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.92rem;letter-spacing:0.02em;
+  background:var(--pink);color:#fff;border:none;border-radius:60px;padding:16px 38px;
+  cursor:pointer;box-shadow:0 12px 32px rgba(212,84,122,0.4);
+  transition:transform 0.3s cubic-bezier(.34,.1,.68,.55), box-shadow 0.3s;
+}
+.cinehero-cta:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 16px 40px rgba(212,84,122,0.5)}
+.cinehero-cta-ghost{
+  font-family:'DM Sans',sans-serif;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
+  color:rgba(255,251,247,0.85);background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;gap:6px;padding:4px;
+}
+.cinehero-dots{position:relative;z-index:10;display:flex;justify-content:center;gap:8px;padding:0 0 26px}
+.cinehero-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,251,247,0.35);transition:.4s;cursor:pointer}
+.cinehero-dot.is-active{background:var(--pink-light);width:18px;border-radius:3px}
+
+@keyframes cineRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.cinehero-eyebrow,.cinehero-headline,.cinehero-sub,.cinehero-cta-row{
+  animation:cineRise 0.9s cubic-bezier(.16,1,.3,1) both;
+}
+.cinehero-headline{animation-delay:0.08s}
+.cinehero-sub{animation-delay:0.2s}
+.cinehero-cta-row{animation-delay:0.32s}
+
+@media(min-width:560px){
+  .cinehero{min-height:860px}
+  .cinehero-headline{font-size:3.1rem;max-width:420px}
+  .cinehero-sub{max-width:360px}
+}
+
+/* NAV (in-app, below hero) */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;border-bottom:2px solid var(--green-pale);position:sticky;top:0;
+  background:linear-gradient(180deg, rgba(255,251,247,0.98), rgba(245,250,248,0.95));backdrop-filter:blur(12px);z-index:100;box-shadow:0 4px 20px rgba(26,77,46,0.08);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--green);font-weight:500;cursor:pointer;letter-spacing:0.03em;background:linear-gradient(135deg, var(--green), var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-back{background:none;border:none;cursor:pointer;color:var(--green);font-size:0.75rem;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;padding:8px 12px;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.2s;border-radius:50px;border:1.5px solid var(--green-pale)}
+.nav-back:hover{color:#fff;background:var(--green);border-color:var(--green)}
+
+/* PAGE TRANSITIONS */
+.page{display:none;animation:fadeIn .35s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* HOME */
+.hero{padding:56px 28px 40px;text-align:center;background:linear-gradient(135deg, rgba(212,212,212,0.02) 0%, rgba(212,175,55,0.03) 100%)}
+.leaf-svg-wrap{margin:0 auto 32px;width:140px;height:140px;filter:drop-shadow(0 8px 24px rgba(26,77,46,0.12))}
+.leaf-path{
+  stroke-dasharray:320;stroke-dashoffset:320;
+  animation:draw 2.4s cubic-bezier(.34,.1,.68,.55) forwards .2s;
+}
+.leaf-path-2{
+  stroke-dasharray:180;stroke-dashoffset:180;
+  animation:draw 2s cubic-bezier(.34,.1,.68,.55) forwards .8s;
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero-title{font-size:3rem;color:var(--green);line-height:1.1;margin-bottom:16px;font-weight:400;letter-spacing:-0.01em}
+.hero-title em{font-style:italic;color:var(--pink);font-weight:500}
+.hero-sub{color:var(--muted);font-size:1rem;line-height:1.7;max-width:340px;margin:0 auto 36px;font-weight:400}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;border-radius:60px;font-size:0.95rem;
+  font-family:'DM Sans',sans-serif;cursor:pointer;border:none;
+  font-weight:600;transition:all 0.3s cubic-bezier(.34,.1,.68,.55);letter-spacing:0.03em;text-transform:uppercase;
+}
+.btn-primary{background:linear-gradient(135deg, var(--pink), #c73f5f);color:#fff;box-shadow:0 8px 24px rgba(212,84,122,0.3)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(212,84,122,0.4)}
+.btn-outline{background:transparent;color:var(--green);border:2px solid var(--green);transition:all 0.3s}
+.btn-outline:hover{background:var(--green);color:#fff;box-shadow:0 8px 24px rgba(26,77,46,0.25)}
+.btn-sm{padding:11px 22px;font-size:0.85rem}
+.btn-full{width:100%;justify-content:center}
+
+.section-label{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--pink);margin-bottom:12px;font-weight:700;opacity:0.85}
+.section-title{font-size:2.2rem;color:var(--green);margin-bottom:8px;font-weight:400;letter-spacing:-0.01em}
+.section{padding:32px 24px 40px}
+.section-header{margin-bottom:24px;border-bottom:1px solid var(--green-pale);padding-bottom:20px}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.plant-card{
+  background:linear-gradient(135deg, #fffbf7 0%, #f5faf8 100%);border:2px solid var(--green-pale);border-radius:18px;
+  padding:22px 14px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(.34,.1,.68,.55);box-shadow:0 4px 12px rgba(26,77,46,0.06);
+}
+.plant-card:hover{border-color:var(--green-light);background:var(--cream);box-shadow:0 12px 28px rgba(26,77,46,0.15);transform:translateY(-4px)}
+.plant-card.selected{border-color:var(--green);background:linear-gradient(135deg, var(--green-pale), #c8e6d7);box-shadow:0 8px 24px rgba(26,77,46,0.25)}
+.plant-card .emoji{font-size:2.4rem;margin-bottom:10px;display:block;transition:transform 0.3s}
+.plant-card:hover .emoji{transform:scale(1.1)}
+.plant-card .pname{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--green);font-weight:500}
+.plant-card .pcategory{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+
+.recipe-card{
+  background:linear-gradient(135deg, #fffbf7 0%, #f5faf8 100%);border:2px solid var(--green-pale);border-radius:18px;
+  padding:24px;cursor:pointer;transition:all 0.3s cubic-bezier(.34,.1,.68,.55);margin-bottom:16px;box-shadow:0 6px 16px rgba(26,77,46,0.08);
+}
+.recipe-card:hover{border-color:var(--pink-light);box-shadow:0 16px 36px rgba(212,84,122,0.15);transform:translateY(-6px)}
+.recipe-card .rtype{display:inline-block;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--pink-pale);color:var(--pink);padding:6px 14px;border-radius:25px;margin-bottom:12px;font-weight:700}
+.recipe-card .rtype.makeup{background:linear-gradient(135deg, #f3e8ff, #e9d5ff);color:#7c3aed}
+.recipe-card .rtype.internal{background:linear-gradient(135deg, #fef3c7, #fde68a);color:#92400e}
+.recipe-card h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--green);margin-bottom:10px;font-weight:500;letter-spacing:-0.01em}
+.recipe-card p{font-size:0.9rem;color:var(--muted);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.recipe-meta{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
+.recipe-meta span{font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;font-weight:500}
+
+/* POPULAR PLANTS ROW */
+.popular-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;padding-left:24px;padding-right:24px;margin:0 -24px;-ms-overflow-style:none;scrollbar-width:none}
+.popular-row::-webkit-scrollbar{display:none}
+.popular-chip{
+  flex-shrink:0;background:linear-gradient(135deg, var(--green-pale), #c8e6d7);border:2px solid var(--green-light);
+  border-radius:50px;padding:10px 20px;cursor:pointer;transition:all 0.3s cubic-bezier(.34,.1,.68,.55);text-align:center;
+  display:flex;align-items:center;gap:10px;box-shadow:0 4px 12px rgba(26,77,46,0.1);
+}
+.popular-chip:hover{background:linear-gradient(135deg, var(--green-light), var(--green));color:#fff;transform:translateY(-3px);box-shadow:0 8px 20px rgba(26,77,46,0.2)}
+.popular-chip .emoji{font-size:1.4rem;transition:transform 0.3s}
+.popular-chip:hover .emoji{transform:scale(1.15)}
+.popular-chip .pname{font-size:0.88rem;color:var(--green);font-weight:600;white-space:nowrap;letter-spacing:0.01em}
+.popular-chip:hover .pname{color:#fff}
+
+/* AREAS */
+.area-groups{display:flex;flex-direction:column;gap:32px}
+.area-group-label{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--pink);margin-bottom:14px;font-weight:700;opacity:0.85}
+.area-pills{display:flex;flex-wrap:wrap;gap:10px}
+.area-pill{
+  background:linear-gradient(135deg, #fffbf7 0%, #f5faf8 100%);border:2px solid var(--green-pale);border-radius:50px;
+  padding:11px 22px;font-size:0.9rem;cursor:pointer;transition:all 0.3s cubic-bezier(.34,.1,.68,.55);color:var(--text);font-weight:500;box-shadow:0 2px 8px rgba(26,77,46,0.06);
+}
+.area-pill:hover{border-color:var(--green-light);color:var(--green);background:var(--cream);transform:translateY(-2px)}
+.area-pill.selected{background:linear-gradient(135deg, var(--green), var(--green-light));color:#fff;border-color:var(--green);box-shadow:0 8px 20px rgba(26,77,46,0.3)}
+
+/* RECIPE DETAIL */
+.recipe-hero{background:linear-gradient(135deg,var(--green-pale),var(--pink-pale));padding:32px 24px}
+.recipe-hero .rtype{display:inline-block;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;background:#fff;color:var(--pink);padding:4px 12px;border-radius:20px;margin-bottom:12px;font-weight:500}
+.recipe-hero h1{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--green);line-height:1.2;font-weight:400}
+.recipe-hero p{color:var(--muted);font-size:.9rem;line-height:1.6;margin-top:10px}
+.recipe-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.recipe-chips .chip{background:#fff;border:1px solid #e5e1db;border-radius:20px;padding:4px 12px;font-size:.75rem;color:var(--muted)}
+
+.recipe-body{padding:24px}
+.detail-section{margin-bottom:28px}
+.detail-section h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--green);margin-bottom:14px;font-weight:500;border-bottom:1px solid #f0ede8;padding-bottom:8px}
+.ingredient-item{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f9f7f5;gap:12px}
+.ingredient-item:last-child{border-bottom:none}
+.ing-name{font-size:.9rem;font-weight:500}
+.ing-amount{font-size:.85rem;color:var(--pink);font-weight:500;white-space:nowrap}
+.ing-note{font-size:.75rem;color:var(--muted);margin-top:2px}
+.step-item{display:flex;gap:12px;margin-bottom:16px;align-items:flex-start}
+.step-num{
+  width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;font-weight:500;
+}
+.step-text{font-size:.9rem;line-height:1.6;color:var(--text);padding-top:4px}
+.tip-item,.caution-item{
+  padding:10px 14px;border-radius:8px;font-size:.85rem;line-height:1.5;margin-bottom:8px;
+}
+.tip-item{background:#f0fdf4;color:#166534;border-left:3px solid var(--green)}
+.caution-item{background:#fff7ed;color:#92400e;border-left:3px solid #f59e0b}
+
+.apply-box{background:var(--green-pale);border-radius:var(--radius);padding:16px;margin-bottom:28px}
+.apply-box .label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px;font-weight:500}
+.apply-box p{font-size:.88rem;color:var(--text);line-height:1.6}
+.meta-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.meta-box{background:#fafaf8;border-radius:8px;padding:12px;text-align:center}
+.meta-box .label{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.meta-box .value{font-size:.9rem;color:var(--green);font-weight:500}
+
+/* PLANT DETAIL */
+.plant-hero{background:linear-gradient(135deg,var(--green-pale),var(--pink-pale));padding:40px 24px;text-align:center}
+.plant-emoji-lg{font-size:4rem;margin-bottom:12px;display:block}
+.plant-hero h1{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--green);font-weight:400}
+.plant-hero .cat-badge{display:inline-block;background:#fff;border-radius:20px;padding:4px 14px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin:8px 0}
+.plant-hero p{color:var(--muted);font-size:.9rem;line-height:1.6;margin-top:10px;max-width:360px;margin-left:auto;margin-right:auto}
+.benefits-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;justify-content:center}
+.benefit-tag{background:#fff;border:1px solid var(--green-light);border-radius:20px;padding:5px 12px;font-size:.78rem;color:var(--green)}
+
+/* STEP INDICATOR */
+.step-indicator{display:flex;align-items:center;gap:8px;padding:20px 24px 0}
+.step-indicator .step-dot{width:8px;height:8px;border-radius:50%;background:#e5e1db;transition:.2s}
+.step-indicator .step-dot.active{background:var(--green)}
+.step-indicator .step-dot.done{background:var(--green-light)}
+.step-label{font-size:.75rem;color:var(--muted);margin-left:4px}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:48px 24px;color:var(--muted)}
+.empty .big{font-size:2.5rem;margin-bottom:12px}
+.empty p{font-size:.9rem;line-height:1.6}
+
+/* STICKY CTA */
+.sticky-cta{position:sticky;bottom:0;padding:16px 24px;background:#fff;border-top:1px solid #f0ede8;z-index:50}
+
+/* DIVIDER */
+.divider{height:2px;background:linear-gradient(90deg, transparent, var(--green-pale), transparent);margin:0 24px}
+
+/* SEARCH */
+.search-wrap{padding:16px 24px 0}
+.search-input{
+  width:100%;padding:12px 16px;border:1.5px solid #e5e1db;border-radius:50px;
+  font-size:.9rem;font-family:'DM Sans',sans-serif;outline:none;transition:.2s;
+}
+.search-input:focus{border-color:var(--green)}
+
+/* SCROLL HINT */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.scroll-hint{text-align:center;padding:8px;color:var(--muted);font-size:.75rem;animation:float 2s ease infinite}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#e5e1db;border-radius:4px}
+
+@media(max-width:480px){.app{box-shadow:none}}
+</style>
+</head>
+<body>
+<!-- ───────────────────────── CINEMATIC HERO ───────────────────────── -->
+<div class="cinehero" id="cinehero">
+  <div class="cinehero-slide slide-1 is-active" data-slide="0"></div>
+  <div class="cinehero-slide slide-2" data-slide="1"></div>
+  <div class="cinehero-slide slide-3" data-slide="2"></div>
+  <div class="cinehero-grain"></div>
+  <div class="cinehero-overlay"></div>
+
+  <nav class="cinehero-nav">
+    <span class="cinehero-logo">Leaf<span class="amp">&amp;</span>Lipstick</span>
+    <button class="cinehero-nav-cta" onclick="document.getElementById('app-shell').scrollIntoView({behavior:'smooth'})">Enter the Garden</button>
+  </nav>
+
+  <div class="cinehero-body">
+    <div class="cinehero-eyebrow">Grown, Not Manufactured</div>
+    <h1 class="cinehero-headline">Your garden already<br/>knows how to make you <em>beautiful.</em></h1>
+    <p class="cinehero-sub">Botanical beauty recipes built from the leaves, petals, and fruit growing right outside your door.</p>
+    <div class="cinehero-cta-row">
+      <button class="cinehero-cta" onclick="document.getElementById('app-shell').scrollIntoView({behavior:'smooth'});goPage('page-discover')">Start Your Ritual</button>
+      <button class="cinehero-cta-ghost" onclick="document.getElementById('app-shell').scrollIntoView({behavior:'smooth'})">&#8595; See what's inside</button>
+    </div>
+  </div>
+
+  <div class="cinehero-dots">
+    <span class="cinehero-dot is-active" data-dot="0"></span>
+    <span class="cinehero-dot" data-dot="1"></span>
+    <span class="cinehero-dot" data-dot="2"></span>
+  </div>
+</div>
+
+<div class="app" id="app-shell">
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <span class="nav-logo" onclick="goHome()">Leaf &amp; Lipstick</span>
+    <button class="nav-back" id="nav-back" style="display:none" onclick="navBack()">&#8592; Back</button>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <div class="leaf-svg-wrap">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="leaf-path" d="M60 100 C60 100 20 80 20 45 C20 20 40 15 60 20 C80 15 100 20 100 45 C100 80 60 100 60 100Z" stroke="#2d6a4f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="leaf-path-2" d="M60 100 C60 100 60 60 60 20" stroke="#e07a8a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path class="leaf-path-2" d="M60 65 C60 65 45 52 35 48" stroke="#e07a8a" stroke-width="1.5" fill="none" stroke-linecap="round" style="animation-delay:1.2s"/>
+          <path class="leaf-path-2" d="M60 55 C60 55 75 42 85 38" stroke="#e07a8a" stroke-width="1.5" fill="none" stroke-linecap="round" style="animation-delay:1.4s"/>
+        </svg>
+      </div>
+      <h1 class="hero-title">Nature's Recipe<br/><em>For Your Beauty.</em></h1>
+      <p class="hero-sub">Discover gentle, botanical treatments crafted from the plants in your very own garden.</p>
+      <button class="btn btn-primary" onclick="goPage('page-discover')">Start Your Ritual &rarr;</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-label">Featured Rituals</div>
+        <h2 class="section-title">Seasonal Recipes</h2>
+      </div>
+      <div id="featured-recipes-list"></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" style="padding-bottom:48px">
+      <div class="section-header">
+        <div class="section-label">Your Garden</div>
+        <h2 class="section-title">Popular Plants</h2>
+      </div>
+      <div class="popular-row" id="popular-plants-row"></div>
+    </div>
+  </div>
+
+  <!-- DISCOVER PAGE -->
+  <div class="page" id="page-discover">
+    <div style="padding:24px 24px 0">
+      <div class="step-indicator">
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <span class="step-label">Step 1 of 3</span>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--green);margin:14px 0 6px;font-weight:400">What's in your garden?</h2>
+      <p style="color:var(--muted);font-size:.88rem;margin-bottom:0">Select the plants you currently have access to.</p>
+    </div>
+    <div class="search-wrap">
+      <input type="search" class="search-input" placeholder="Search plants..." id="plant-search" oninput="filterPlants()"/>
+    </div>
+    <div style="padding:16px 24px 100px">
+      <div class="card-grid" id="plants-grid"></div>
+    </div>
+    <div class="sticky-cta">
+      <button class="btn btn-primary btn-full" id="discover-cta" onclick="goPage('page-treat')" style="display:none">
+        What would you like to treat? &rarr;
+      </button>
+      <p style="text-align:center;color:var(--muted);font-size:.82rem;display:none" id="discover-hint">Select at least one plant to continue</p>
+    </div>
+  </div>
+
+  <!-- TREAT PAGE -->
+  <div class="page" id="page-treat">
+    <div style="padding:24px 24px 16px">
+      <div class="step-indicator">
+        <div class="step-dot done"></div>
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+        <span class="step-label">Step 2 of 3</span>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--green);margin:14px 0 6px;font-weight:400">What would you like to treat?</h2>
+      <p style="color:var(--muted);font-size:.88rem">Choose an area to beautify or heal.</p>
+    </div>
+    <div style="padding:16px 24px 32px">
+      <div class="area-groups" id="area-groups"></div>
+    </div>
+  </div>
+
+  <!-- RECIPES PAGE -->
+  <div class="page" id="page-recipes">
+    <div style="padding:24px 24px 16px">
+      <div class="step-indicator">
+        <div class="step-dot done"></div>
+        <div class="step-dot done"></div>
+        <div class="step-dot active"></div>
+        <span class="step-label">Step 3 of 3</span>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--green);margin:14px 0 4px;font-weight:400">Your Natural Recipes</h2>
+      <p style="color:var(--muted);font-size:.82rem" id="recipes-subtitle"></p>
+    </div>
+    <div style="padding:0 24px 48px" id="recipes-list"></div>
+  </div>
+
+  <!-- RECIPE DETAIL PAGE -->
+  <div class="page" id="page-recipe-detail">
+    <div id="recipe-detail-content"></div>
+  </div>
+
+  <!-- PLANT DETAIL PAGE -->
+  <div class="page" id="page-plant-detail">
+    <div id="plant-detail-content"></div>
+  </div>
+
+  <!-- ALL RECIPES PAGE -->
+  <div class="page" id="page-all-recipes">
+    <div style="padding:24px 24px 16px">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--green);font-weight:400">All Recipes</h2>
+      <p style="color:var(--muted);font-size:.85rem;margin-top:6px">Browse the complete garden beauty library.</p>
+    </div>
+    <div class="search-wrap" style="padding-bottom:12px">
+      <input type="search" class="search-input" placeholder="Search recipes..." id="recipe-search" oninput="filterAllRecipes()"/>
+    </div>
+    <div style="padding:0 24px 48px" id="all-recipes-list"></div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────────────
+const PLANTS = [
+  {id:1,name:"Aloe Vera",slug:"aloe-vera",emoji:"🌿",category:"succulent",skinType:"all",popular:true,description:"A succulent plant renowned for its thick, gel-filled leaves. One of the oldest known medicinal plants used for thousands of years for skin healing and beauty.",benefits:["Soothes irritation","Moisturizes deeply","Reduces inflammation","Heals sunburn","Fights acne","Anti-aging","Brightens complexion"]},
+  {id:13,name:"Basil",slug:"basil",emoji:"🌿",category:"herb",skinType:"oily",popular:false,description:"Beyond the kitchen, basil is a potent antibacterial and antioxidant herb that clears acne, evens skin tone, and adds a beautiful shine to hair.",benefits:["Antibacterial","Anti-acne","Antioxidant","Evens skin tone","Brightens skin","Strengthens hair","Antifungal"]},
+  {id:23,name:"Beet",slug:"beet",emoji:"🫜",category:"vegetable",skinType:"all",popular:true,description:"Beets are liquid rubies for skin. Their betalain pigments double as antioxidants and natural dyes that tint lips and cheeks. Rich in iron, folate, and nitrates that flood skin with circulation and radiance.",benefits:["Natural lip and cheek tint","Rich in iron and folate","Boosts skin circulation","Powerful antioxidant","Detoxifying internally","Brightens complexion","Anti-inflammatory"]},
+  {id:28,name:"Bell Pepper",slug:"bell-pepper",emoji:"🫑",category:"vegetable",skinType:"all",popular:false,description:"Bell peppers, especially red ones, have more vitamin C than oranges. Applied topically, their vitamin C stimulates collagen, fades dark spots, and protects against free radical damage.",benefits:["Highest vitamin C of any vegetable","Stimulates collagen production","Fades dark spots","Antioxidant protection","Boosts circulation","Anti-aging","Brightening"]},
+  {id:26,name:"Cabbage",slug:"cabbage",emoji:"🥬",category:"vegetable",skinType:"oily",popular:false,description:"Cabbage is a hidden beauty gem. Its vitamin K, C, and sulfur content makes it a potent anti-inflammatory and detoxifier. Cabbage leaf poultices have been used for centuries to reduce swelling and clear acne.",benefits:["High in vitamin K","Anti-inflammatory poultice","Reduces swelling","Detoxifying","Antibacterial","Clears congested pores","Sulfur for hair and skin"]},
+  {id:6,name:"Calendula",slug:"calendula",emoji:"🌻",category:"flower",skinType:"all",popular:true,description:"Bright orange and yellow petals packed with flavonoids and antioxidants. Calendula is one of the most healing garden plants, known for its ability to soothe, repair, and protect all skin types.",benefits:["Deeply healing","Anti-inflammatory","Antifungal","Repairs damaged skin","Reduces scarring","Gentle for all skin types","Antioxidant-rich"]},
+  {id:25,name:"Cantaloupe",slug:"cantaloupe",emoji:"🍈",category:"fruit",skinType:"dry",popular:true,description:"Cantaloupe is one of the richest sources of beta-carotene among fruits, giving it powerful anti-aging properties. The flesh creates a silky, enzyme-rich mask that melts away dead skin cells.",benefits:["Rich in beta-carotene","Enzymatic exfoliation","Deep hydration","Vitamin C brightening","Softens rough skin","Anti-aging","Improves elasticity"]},
+  {id:36,name:"Carrot",slug:"carrot",emoji:"🥕",category:"vegetable",skinType:"all",popular:true,description:"Carrots are one of the most beta-carotene-rich plants available in any garden. Beta-carotene converts to vitamin A — retinol's plant-based cousin — reducing wrinkles and giving skin a genuine sun-kissed glow.",benefits:["Rich in beta-carotene (pro-vitamin A)","Reduces wrinkles","Evens skin tone","Natural glow from within","Antioxidant","Stimulates collagen","Brightens dull complexion"]},
+  {id:46,name:"Carrot Flower",slug:"carrot-flower",emoji:"🌸",category:"flower",skinType:"sensitive",popular:false,description:"The delicate white umbel flowers of the carrot plant contain concentrated flavonoids and volatile oils not found in the root. These blossoms make an exquisite anti-inflammatory facial steam.",benefits:["Concentrated flavonoids","Anti-inflammatory","Gentle brightening","Facial steam flowers","Antioxidant volatile oils","Rare beauty botanical","Skin-softening"]},
+  {id:48,name:"Celosia (Neon Blossom)",slug:"celosia",emoji:"🌺",category:"flower",skinType:"all",popular:false,description:"Celosia — the vivid neon cockscomb flower — contains betacyanins and betaxanthins that act as powerful antioxidants and natural pigments, creating rich vibrantly tinted skin tonics and natural makeup.",benefits:["Betacyanin antioxidants","Natural vivid pigment for makeup","Anti-inflammatory","Antioxidant-rich plumes","Natural cheek and lip tint","Skin-brightening","Edible flower"]},
+  {id:4,name:"Chamomile",slug:"chamomile",emoji:"🌼",category:"flower",skinType:"sensitive",popular:true,description:"Delicate daisy-like flowers with powerful anti-inflammatory and brightening properties. Chamomile is especially gentle for sensitive and irritated skin, and its flavonoids help even skin tone.",benefits:["Anti-inflammatory","Brightens skin","Soothes redness","Gentle for sensitive skin","Antioxidant","Reduces dark circles","Promotes relaxation"]},
+  {id:41,name:"Cilantro",slug:"cilantro",emoji:"🌿",category:"herb",skinType:"all",popular:false,description:"Cilantro is one of the most powerful natural detoxifiers. Its aldehyde compounds bind to heavy metals in the body, while topically its antioxidant content brightens skin and has a documented skin-lightening effect on hyperpigmentation.",benefits:["Heavy metal detoxifier","Skin brightening","Antioxidant-rich","Reduces dark spots","Anti-inflammatory","Antibacterial","Internal skin clarity"]},
+  {id:29,name:"Cornflower",slug:"cornflower",emoji:"💙",category:"flower",skinType:"sensitive",popular:false,description:"Bachelor's button has been used in European beauty traditions for centuries. Cornflower water is a classic remedy for soothing tired, red eyes, and makes a delicate anti-inflammatory toner prized for sensitive skin.",benefits:["Soothes tired eyes","Anti-inflammatory","Gentle on sensitive skin","Natural astringent","Reduces redness","Calming toner","Antioxidant flavonoids"]},
+  {id:31,name:"Cosmos Flower",slug:"cosmos",emoji:"🌸",category:"flower",skinType:"all",popular:false,description:"Cosmos flowers contain flavonoids and quercetin that protect skin from UV damage and inflammation. The flowers make a beautiful antioxidant-rich face rinse and can be dried for skin-brightening teas.",benefits:["Quercetin UV protection","Anti-inflammatory flavonoids","Antioxidant-rich","Brightening face rinse","Gentle for sensitive skin","Can be consumed as tea","Calming"]},
+  {id:8,name:"Cucumber",slug:"cucumber",emoji:"🥒",category:"vegetable",skinType:"all",popular:true,description:"Composed of over 95% water, cucumber is the ultimate hydrating and cooling beauty ingredient. Its silica and antioxidants reduce puffiness, soothe irritation, and refresh tired skin.",benefits:["Deeply hydrating","Reduces puffiness","Cools and soothes","Reduces dark circles","Anti-inflammatory","High in silica","Tones skin"]},
+  {id:16,name:"Echinacea",slug:"echinacea",emoji:"🌸",category:"flower",skinType:"all",popular:false,description:"A beautiful purple coneflower that boosts skin immunity and promotes collagen production. The root and flowers are used topically to heal and firm aging or damaged skin.",benefits:["Boosts skin immunity","Promotes collagen","Anti-inflammatory","Antioxidant","Heals damaged skin","Firms skin","Reduces wrinkles"]},
+  {id:52,name:"Eggplant",slug:"eggplant",emoji:"🍆",category:"vegetable",skinType:"all",popular:false,description:"Eggplant contains nasunin — a rare anthocyanin that protects cell membranes from free radical damage. It also contains chlorogenic acid, one of the most powerful natural antioxidants studied for anti-aging.",benefits:["Nasunin unique anthocyanin","Protects cell membranes","Reduces hyperpigmentation","Chlorogenic acid antioxidant","Anti-aging","Firms skin","Detoxifying when consumed"]},
+  {id:53,name:"Eggplant Blossom",slug:"eggplant-blossom",emoji:"💜",category:"flower",skinType:"all",popular:false,description:"The violet star-shaped blossoms of the eggplant are rich in delphinidin — the anthocyanin pigment responsible for the plant's gorgeous purple color. Creates a stunning violet-tinted toner and natural pigment for makeup.",benefits:["Delphinidin anthocyanin","Natural violet pigment for makeup","Anti-inflammatory","Antioxidant toner","Natural eye and lip tint","Gentle on skin","Unique garden beauty botanical"]},
+  {id:18,name:"Elderflower",slug:"elderflower",emoji:"🌸",category:"flower",skinType:"all",popular:false,description:"Delicate white flowers with gentle astringent and brightening properties. Elderflower water has been used for centuries to maintain clear, even, luminous skin.",benefits:["Gentle astringent","Brightens skin","Anti-inflammatory","Reduces pores","Soothes irritation","Antioxidant","Calming"]},
+  {id:39,name:"Fennel",slug:"fennel",emoji:"🌿",category:"herb",skinType:"all",popular:false,description:"Fennel's phytoestrogens naturally plump and firm aging skin. The seeds have antimicrobial properties for acne and can be brewed into a clarifying toner, while fennel tea promotes digestive health that reflects in clear skin.",benefits:["Phytoestrogens plump aging skin","Antimicrobial for acne","Digestive support for clear skin","Natural astringent","Anti-inflammatory","Brightening tea","Firms and tones"]},
+  {id:51,name:"Fig",slug:"fig",emoji:"🍃",category:"fruit",skinType:"all",popular:false,description:"Figs are one of the most ancient beauty ingredients. Rich in ficin (a digestive enzyme), fig's milky sap and ripe flesh exfoliate, brighten, and soften skin remarkably. The latex from unripe figs fades scars.",benefits:["Ficin enzyme exfoliation","Sap fades scars","Deeply hydrating","Brightens skin","Rich in vitamins A,B,C,K","Softens rough skin","Ancient beauty remedy"]},
+  {id:45,name:"Golden Honey Melon",slug:"golden-honey-melon",emoji:"🍋",category:"fruit",skinType:"dry",popular:false,description:"The golden-skinned honey melon is rich in beta-carotene in its warm golden flesh, giving it anti-aging and skin-illuminating properties. Its natural sugars act as humectants while its enzymes gently exfoliate.",benefits:["Beta-carotene illuminating","Natural humectant sugars","Enzymatic exfoliation","Brightens dull skin","Anti-aging","Deeply hydrating","Vitamin C"]},
+  {id:12,name:"Green Tea",slug:"green-tea",emoji:"🍵",category:"herb",skinType:"oily",popular:true,description:"Rich in EGCG and polyphenols, green tea is a superstar antioxidant for skin. Both topical application and drinking green tea significantly reduce UV damage, inflammation, and aging.",benefits:["Powerful antioxidant","Reduces UV damage","Anti-aging","Shrinks pores","Anti-inflammatory","Fights acne","Boosts metabolism"]},
+  {id:10,name:"Hibiscus",slug:"hibiscus",emoji:"🌺",category:"flower",skinType:"all",popular:true,description:"Called the 'Botox plant,' hibiscus contains natural AHAs and anthocyanins that gently exfoliate, firm, and brighten skin. The flowers also make a potent anti-aging tea.",benefits:["Natural AHAs for exfoliation","Firms and tightens skin","Brightens complexion","Anti-aging","Boosts collagen","Rich in antioxidants","Natural diuretic"]},
+  {id:15,name:"Honey (from garden)",slug:"honey",emoji:"🍯",category:"herb",skinType:"dry",popular:true,description:"Raw honey from garden bees is a complete beauty treatment. Its natural enzymes, hydrogen peroxide, and humectant properties make it one of the most powerful skin healers available.",benefits:["Natural humectant","Antibacterial","Heals wounds","Moisturizes deeply","Brightens skin","Anti-aging enzymes","Reduces acne"]},
+  {id:44,name:"Honeydew Melon",slug:"honeydew-melon",emoji:"🍈",category:"fruit",skinType:"dry",popular:false,description:"Honeydew melon is extraordinarily high in skin-hydrating compounds and vitamin C. Its pale green flesh contains rare adenosine that calms skin inflammation and promotes cellular repair.",benefits:["Extreme hydration","Vitamin C brightening","Adenosine cell repair","Calms inflammation","Plumps skin","Natural toner","Antioxidant"]},
+  {id:38,name:"Kale",slug:"kale",emoji:"🥬",category:"vegetable",skinType:"all",popular:false,description:"Kale is arguably the most nutrient-dense beauty plant you can grow. Its combination of vitamins A, C, K, and B-complex, plus iron, calcium, and omega-3s, addresses virtually every skin and hair concern.",benefits:["Most nutrient-dense beauty green","Vitamins A,C,K and B-complex","Iron and calcium for hair","Omega-3s for skin barrier","Brightening topically","Firms skin","Anti-aging powerhouse"]},
+  {id:3,name:"Lavender",slug:"lavender",emoji:"💜",category:"herb",skinType:"sensitive",popular:true,description:"A fragrant herb with calming, antibacterial, and skin-soothing properties. Lavender is especially beneficial for sensitive skin and has been shown to promote relaxation and sleep.",benefits:["Antibacterial","Calms inflammation","Soothes sensitive skin","Promotes healing","Reduces scars","Relaxing aroma","Antifungal"]},
+  {id:11,name:"Lemon Balm",slug:"lemon-balm",emoji:"🌿",category:"herb",skinType:"all",popular:false,description:"A gentle, lemon-scented herb with antiviral and calming properties. Excellent for clear, calm skin both topically and as a soothing tea.",benefits:["Antiviral","Reduces anxiety","Clears skin","Antibacterial","Calming scent","Antioxidant","Digestive support"]},
+  {id:35,name:"Lettuce",slug:"lettuce",emoji:"🥬",category:"vegetable",skinType:"sensitive",popular:false,description:"Romaine and other dark lettuces are surprising beauty plants. Over 95% water with silica and vitamin K that strengthen hair, nails, and skin. A time-honored remedy for clear, calm skin and better sleep.",benefits:["High silica for hair and nails","Vitamin K for skin strength","Deeply hydrating","Calming and sleep-promoting","Anti-inflammatory","Brightening when consumed","Gentle topical rinse"]},
+  {id:33,name:"Marigold (Tagetes)",slug:"marigold",emoji:"🌼",category:"flower",skinType:"all",popular:false,description:"Garden marigold (Tagetes) has lutein-rich petals that are powerfully anti-inflammatory and antifungal. Marigold petal infusions treat athlete's foot, nail fungus, and make healing compresses for irritated skin.",benefits:["Lutein anti-inflammatory","Antifungal","Heals sun-damaged skin","Reduces skin irritation","Antibacterial compress","Antioxidant-rich","Treats nail issues"]},
+  {id:5,name:"Mint",slug:"mint",emoji:"🌿",category:"herb",skinType:"oily",popular:true,description:"Invigorating herb with cooling menthol that tightens pores, controls oil, and refreshes skin. Also excellent for digestive beauty teas that clear the complexion from the inside.",benefits:["Tightens pores","Controls oil","Cooling sensation","Antibacterial","Freshens breath","Clears complexion","Stimulates circulation"]},
+  {id:34,name:"Nasturtium",slug:"nasturtium",emoji:"🌸",category:"flower",skinType:"oily",popular:false,description:"One of the most edible and beauty-potent flowers in any garden. Contains more vitamin C than spinach and natural antibiotic compounds. Both leaves and flowers treat acne and promote hair growth.",benefits:["Higher vitamin C than spinach","Natural antibiotic","Edible for clear skin","Anti-acne","Promotes hair growth","Antifungal","Brightening"]},
+  {id:20,name:"Nettle",slug:"nettle",emoji:"🌿",category:"herb",skinType:"all",popular:false,description:"One of nature's most nutritious plants when consumed as tea. Nettle is rich in silica, iron, and antioxidants that promote hair growth, clear skin, and overall beauty from within.",benefits:["Rich in silica","Promotes hair growth","Clears skin","Iron-rich","Anti-inflammatory","Detoxifying","Reduces dandruff"]},
+  {id:42,name:"Onion",slug:"onion",emoji:"🧅",category:"vegetable",skinType:"oily",popular:false,description:"Onions contain quercetin — one of the most bioavailable antioxidants in the plant kingdom — along with sulfur compounds that stimulate hair and nail growth, and AHAs that gently resurface skin.",benefits:["Quercetin antioxidant","Sulfur for hair growth","Natural AHA exfoliant","Reduces scarring","Antibacterial","Fades dark spots","Boosts collagen"]},
+  {id:14,name:"Peppermint",slug:"peppermint",emoji:"🌿",category:"herb",skinType:"oily",popular:false,description:"A more intense mint with higher menthol content. Excellent for scalp stimulation, oil control, and creating refreshing skin toners. Clinically shown to stimulate hair growth.",benefits:["Stimulates scalp","Controls oil","Cooling effect","Antibacterial","Invigorating","Tightens pores","Reduces headaches"]},
+  {id:43,name:"Pineapple",slug:"pineapple",emoji:"🍍",category:"fruit",skinType:"oily",popular:true,description:"Pineapple contains bromelain — a powerful proteolytic enzyme that dissolves dead skin protein more effectively than almost any other natural ingredient. Also contains high levels of vitamin C and manganese.",benefits:["Bromelain enzyme exfoliation","Vitamin C brightening","Dissolves dead skin protein","Stimulates collagen","Reduces inflammation","Fades scars","Natural chemical peel"]},
+  {id:21,name:"Pumpkin",slug:"pumpkin",emoji:"🎃",category:"vegetable",skinType:"all",popular:true,description:"Every part of the pumpkin has beauty uses — the flesh is rich in beta-carotene and natural enzymes that exfoliate and brighten, the seeds are packed with zinc for acne and hair growth, and the flowers infuse into gentle skin oils.",benefits:["Enzymatic exfoliation","Rich in beta-carotene","Brightens complexion","Seeds high in zinc for acne","Promotes hair growth","Softens skin","Anti-aging antioxidants"]},
+  {id:47,name:"Pumpkin Blossom",slug:"pumpkin-blossom",emoji:"🌼",category:"flower",skinType:"sensitive",popular:false,description:"Pumpkin flowers are edible, delicate, and rich in lutein, zeaxanthin, and beta-carotene. The blossoms create a soothing golden infusion for even the most sensitive skin.",benefits:["Lutein and zeaxanthin","Beta-carotene antioxidant","Gentle and soothing","Brightening infusion","Sensitive skin safe","Anti-inflammatory","Edible beauty botanical"]},
+  {id:2,name:"Rose",slug:"rose",emoji:"🌹",category:"flower",skinType:"all",popular:true,description:"The queen of flowers has been used in beauty rituals since ancient times. Rose petals, rosewater, and rosehip are all powerful natural beauty ingredients with gentle astringent and anti-aging properties.",benefits:["Natural astringent","Balances pH","Hydrates skin","Reduces redness","Anti-aging","Calming scent","Brightens dull skin"]},
+  {id:7,name:"Rosemary",slug:"rosemary",emoji:"🌿",category:"herb",skinType:"all",popular:true,description:"An aromatic evergreen herb that stimulates circulation and is one of the most effective natural remedies for hair growth and scalp health. Also a powerful antioxidant for skin.",benefits:["Stimulates hair growth","Improves circulation","Antioxidant","Antibacterial","Strengthens hair","Reduces dandruff","Anti-aging for skin"]},
+  {id:27,name:"Strawberry",slug:"strawberry",emoji:"🍓",category:"fruit",skinType:"oily",popular:true,description:"Strawberries are natural teeth whiteners and skin brighteners thanks to their malic acid content. They also contain salicylic acid for acne, ellagic acid to prevent collagen breakdown, and vitamins C and B.",benefits:["Natural brightener","Malic acid exfoliation","Teeth whitening","Anti-acne salicylic acid","Vitamin C glow","Prevents collagen breakdown","Fades hyperpigmentation"]},
+  {id:49,name:"Strawberry Blossom",slug:"strawberry-blossom",emoji:"🌸",category:"flower",skinType:"sensitive",popular:false,description:"Strawberry blossoms carry all the ellagic acid of the fruit in a gentler, less acidic form. The white petals create a gentle brightening toner ideal for sensitive skin that cannot tolerate the acidity of fresh berry.",benefits:["Ellagic acid (gentler than fruit)","Brightening toner","Sensitive skin safe","Gentle volatile oils","Facial steam","Antioxidant","Skin-softening"]},
+  {id:32,name:"Sunflower",slug:"sunflower",emoji:"🌻",category:"flower",skinType:"all",popular:true,description:"Every part of the sunflower has beauty value. The seeds produce one of the finest skin oils — lightweight, high in vitamin E and linoleic acid that reduces acne and protects the skin barrier.",benefits:["Sunflower seed oil high in vitamin E","Linoleic acid for acne","Lightweight skin barrier oil","Petal infusion soothes","Anti-aging vitamin E","Moisturizes without clogging pores","Golden infusion for dry skin"]},
+  {id:30,name:"Sweet William",slug:"sweet-william",emoji:"🌸",category:"flower",skinType:"sensitive",popular:false,description:"Sweet William flowers contain eugenol — a natural antiseptic and antioxidant compound. The flowers can be infused into skin-calming waters and face mists that reduce inflammation.",benefits:["Natural antiseptic eugenol","Anti-inflammatory","Calming skin mist","Antioxidant","Gentle fragrance","Soothing for irritated skin","Antibacterial"]},
+  {id:17,name:"Thyme",slug:"thyme",emoji:"🌿",category:"herb",skinType:"oily",popular:false,description:"A culinary herb with powerful antimicrobial properties that has been shown to be more effective than benzoyl peroxide for treating acne. Also excellent for scalp health.",benefits:["Fights acne bacteria","Antimicrobial","Astringent","Antioxidant","Heals infections","Promotes hair growth","Anti-inflammatory"]},
+  {id:22,name:"Tomato",slug:"tomato",emoji:"🍅",category:"vegetable",skinType:"oily",popular:true,description:"Tomatoes contain lycopene — one of the most powerful antioxidants found in any plant. They also contain natural salicylic acid that unclogs pores, and their slightly acidic pH helps balance oily skin.",benefits:["Lycopene antioxidant","Natural salicylic acid","Unclogs pores","Brightens skin","Reduces sunburn","Shrinks pores","Fades dark spots"]},
+  {id:50,name:"Tomato Blossom",slug:"tomato-blossom",emoji:"🌼",category:"flower",skinType:"sensitive",popular:false,description:"Tomato blossoms contain concentrated lycopene in a gentler, less acidic form than the fruit. The star-shaped yellow flowers infuse into a pore-refining, antioxidant-rich facial water.",benefits:["Concentrated lycopene","Less acidic than fruit","Pore-refining","Antioxidant facial water","Sensitive skin friendly","Anti-aging","Brightening"]},
+  {id:9,name:"Turmeric",slug:"turmeric",emoji:"🌿",category:"herb",skinType:"all",popular:true,description:"The golden spice revered in Ayurvedic beauty for thousands of years. Curcumin gives turmeric its powerful anti-inflammatory and brightening properties that reduce hyperpigmentation.",benefits:["Brightens skin","Reduces hyperpigmentation","Anti-inflammatory","Antioxidant","Fights acne bacteria","Evens skin tone","Anti-aging"]},
+  {id:40,name:"Violet",slug:"violet",emoji:"💜",category:"flower",skinType:"sensitive",popular:false,description:"Garden violets are among the most gentle and beautiful beauty botanicals. Rich in vitamins A and C, violet leaves and flowers create a deeply soothing, anti-inflammatory treatment.",benefits:["Vitamins A and C","Deeply soothing","Anti-inflammatory","Facial steam flowers","Healing compress leaves","Moisturizing","Gentle for sensitive skin"]},
+  {id:24,name:"Watermelon",slug:"watermelon",emoji:"🍉",category:"fruit",skinType:"all",popular:true,description:"Watermelon is 92% water, making it the ultimate skin hydrator. Its rind is packed with citrulline that improves circulation, while the flesh contains lycopene and vitamin C that protect and brighten skin.",benefits:["Extreme hydration","Lycopene antioxidant","Brightens skin","Citrulline for circulation","Pore minimizing","Cooling and soothing","Anti-aging"]},
+  {id:19,name:"Yarrow",slug:"yarrow",emoji:"🌸",category:"herb",skinType:"oily",popular:false,description:"An underappreciated wildflower with powerful astringent and wound-healing properties. Excellent for oily, acne-prone skin and balancing combination skin.",benefits:["Powerful astringent","Reduces inflammation","Antibacterial","Controls oil","Tightens pores","Heals minor wounds","Balances skin"]},
+  {id:37,name:"Zucchini",slug:"zucchini",emoji:"🥒",category:"vegetable",skinType:"sensitive",popular:false,description:"Zucchini is a gentle, highly hydrating vegetable with riboflavin, zinc, and antioxidants. The flesh makes a wonderfully cooling, anti-inflammatory mask for sensitive, sun-stressed skin.",benefits:["Deeply hydrating","Zinc for healing","Riboflavin for cell repair","Cooling and soothing","Anti-inflammatory","Gentle for sensitive skin","Hydrating internal food"]}
+];
+
+const AREAS = [
+  {id:1,name:"Face",slug:"face",category:"face",description:"Overall facial skin care and treatment"},
+  {id:2,name:"Eyes",slug:"eyes",category:"face",description:"Under-eye circles, puffiness, and eyelid care"},
+  {id:3,name:"Lips",slug:"lips",category:"face",description:"Lip softening, plumping, and care"},
+  {id:4,name:"Forehead",slug:"forehead",category:"face",description:"Fine lines, wrinkles, and brow area"},
+  {id:5,name:"Cheeks",slug:"cheeks",category:"face",description:"Redness, blush, and cheek plumping"},
+  {id:6,name:"Neck",slug:"neck",category:"face",description:"Neck firming, lines, and decolletage"},
+  {id:18,name:"Lips (Makeup)",slug:"lips-makeup",category:"face",description:"Natural lip color, gloss, stain, and balm treatments"},
+  {id:19,name:"Cheeks & Eyes (Makeup)",slug:"cheeks-eyes-makeup",category:"face",description:"Natural blush, bronzer, eye shadow, and highlighter"},
+  {id:20,name:"Full Face (Makeup)",slug:"full-face-makeup",category:"face",description:"Natural foundation, concealer, primer, and setting treatments"},
+  {id:7,name:"Scalp",slug:"scalp",category:"hair",description:"Scalp health, dandruff, and hair growth"},
+  {id:8,name:"Hair",slug:"hair",category:"hair",description:"Hair shine, strength, and conditioning"},
+  {id:9,name:"Hands",slug:"hands",category:"body",description:"Hand softening and nail care"},
+  {id:10,name:"Feet",slug:"feet",category:"body",description:"Foot softening and heel care"},
+  {id:11,name:"Body Skin",slug:"body-skin",category:"body",description:"Full body moisturizing and smoothing"},
+  {id:12,name:"Underarms",slug:"underarms",category:"body",description:"Natural deodorant and brightening"},
+  {id:13,name:"Bath & Soak",slug:"bath-soak",category:"body",description:"Full body relaxation and skin softening"},
+  {id:14,name:"Complexion (Internal)",slug:"complexion-internal",category:"internal",description:"Drinks and teas for glowing skin from within"},
+  {id:15,name:"Hair Growth (Internal)",slug:"hair-growth-internal",category:"internal",description:"Teas and supplements for hair growth"},
+  {id:16,name:"Anti-Aging (Internal)",slug:"anti-aging-internal",category:"internal",description:"Internal treatments for youthful skin"},
+  {id:17,name:"Detox (Internal)",slug:"detox-internal",category:"internal",description:"Cleansing teas for clear, radiant skin"}
+];
+
+const RECIPES = [
+  {id:1,title:"Aloe & Rose Brightening Face Mask",description:"A luminous mask that combines aloe vera's healing gel with rose petal water to brighten, hydrate, and gently even your complexion.",plantIds:[1,2],plantNames:["Aloe Vera","Rose"],areaId:1,areaName:"Face",treatmentType:"mask",ingredients:[{name:"Fresh aloe vera gel",amount:"3 tablespoons",notes:"Scoop directly from leaf"},{name:"Rose petal water (rosewater)",amount:"1 tablespoon",notes:"Or steep fresh petals in warm water"},{name:"Raw honey",amount:"1 teaspoon",notes:"Optional for extra moisture"}],instructions:["Harvest a thick aloe vera leaf and slice it open. Scoop out 3 tablespoons of clear gel into a bowl.","Add rosewater and honey if using. Stir gently until combined.","Cleanse your face thoroughly and pat dry.","Apply a generous layer of the mask to your face, avoiding the eye area.","Relax for 15-20 minutes while the mask works its magic.","Rinse with cool water and follow with your usual moisturizer."],applicationMethod:"Apply to clean, dry face. Leave on for 15-20 minutes. Rinse with cool water.",prepTime:"5 minutes",duration:"15-20 minutes",frequency:"2-3 times per week",tips:["Store leftover mask in the fridge for up to 3 days","Best applied after a warm shower when pores are open","The cooling sensation is normal and means the aloe is working"],cautions:["Do a patch test if you have sensitive skin","Avoid getting into eyes"],featured:true},
+  {id:2,title:"Chamomile Eye Soother",description:"Ancient remedy for tired, puffy eyes. Chamomile's natural flavonoids reduce puffiness and dark circles while soothing delicate under-eye skin.",plantIds:[4],plantNames:["Chamomile"],areaId:2,areaName:"Eyes",treatmentType:"serum",ingredients:[{name:"Dried chamomile flowers (or 2 chamomile tea bags)",amount:"2 tablespoons",notes:null},{name:"Boiling water",amount:"1 cup",notes:null},{name:"Cotton pads",amount:"4-6 pads",notes:"For application"}],instructions:["Steep chamomile flowers in boiling water for 10 minutes.","Strain and let the tea cool completely. For best results, refrigerate for 30 minutes.","Soak cotton pads in the cool chamomile tea.","Lie down and place soaked pads over closed eyes.","Rest for 10-15 minutes.","Remove pads and gently pat the remaining liquid into skin."],applicationMethod:"Place soaked cotton pads over closed eyes and rest for 10-15 minutes.",prepTime:"10 minutes (plus cooling time)",duration:"10-15 minutes",frequency:"Daily or as needed",tips:["The colder the chamomile tea, the more effective it is for puffiness","Make a big batch and keep in the fridge for up to a week","Works best in the morning on puffy eyes"],cautions:["Never apply directly to open eyes","Use only if not allergic to chamomile (daisy family allergy)"],featured:true},
+  {id:3,title:"Rose Petal Lip Scrub",description:"A gentle, sweet scrub made from rose petals and raw sugar that exfoliates dry lips, leaving them soft, plump, and naturally tinted.",plantIds:[2,15],plantNames:["Rose","Honey"],areaId:3,areaName:"Lips",treatmentType:"scrub",ingredients:[{name:"Fresh rose petals",amount:"6-8 petals",notes:"Deep red for more color"},{name:"Raw cane sugar",amount:"1 tablespoon",notes:null},{name:"Raw honey",amount:"1 teaspoon",notes:null},{name:"Coconut or almond oil",amount:"1/2 teaspoon",notes:null}],instructions:["Crush the rose petals with the back of a spoon until a paste forms.","Mix in the sugar, honey, and oil until combined into a thick scrub.","Apply a small amount to lips and gently massage in circular motions for 1 minute.","Let sit for 2 minutes to allow natural pigments to tint lips.","Lick off or rinse away. Apply a lip balm or a drop of rosehip oil to seal in moisture."],applicationMethod:"Massage gently onto lips for 1 minute, then let sit 2 more minutes before removing.",prepTime:"3 minutes",duration:"3 minutes",frequency:"2-3 times per week",tips:["Red or dark pink roses give the most natural lip tint","Use immediately after making for best results","You can safely lick this off — it's delicious"],cautions:["Use organic roses only — no pesticides","Avoid if allergic to roses"],featured:true},
+  {id:4,title:"Lavender & Honey Acne-Calming Mask",description:"A soothing antibacterial mask that combines lavender's antimicrobial power with honey's healing enzymes to calm active breakouts and prevent new ones.",plantIds:[3,15],plantNames:["Lavender","Honey"],areaId:1,areaName:"Face",treatmentType:"mask",ingredients:[{name:"Raw honey",amount:"2 tablespoons",notes:"Manuka works best but any raw honey will do"},{name:"Fresh lavender flowers",amount:"1 tablespoon",notes:"Or 3 drops lavender essential oil"},{name:"Oat flour",amount:"1 teaspoon",notes:"Optional for sensitive skin"}],instructions:["If using fresh lavender flowers, crush them lightly to release the oils.","Mix honey with lavender until well combined.","Add oat flour if your skin is very sensitive or reactive.","Apply a thin layer to clean skin, focusing on breakout areas.","Leave on for 20 minutes.","Rinse with warm water followed by a cool rinse to close pores."],applicationMethod:"Apply thin layer to clean skin. Leave 20 minutes. Rinse with warm then cool water.",prepTime:"5 minutes",duration:"20 minutes",frequency:"3 times per week during breakouts",tips:["Spot treat active pimples overnight with a dab of the mixture","Raw honey should not be liquid — it should be thick and slightly crystallized","Keep in the fridge between uses for up to 1 week"],cautions:["Do not use essential oil directly on skin without diluting in the honey","Patch test on inner wrist first if sensitive"],featured:false},
+  {id:5,title:"Green Tea & Turmeric Brightening Serum",description:"A potent antioxidant serum that combines green tea's EGCG with turmeric's curcumin to fade dark spots, even skin tone, and protect against aging.",plantIds:[12,9],plantNames:["Green Tea","Turmeric"],areaId:1,areaName:"Face",treatmentType:"serum",ingredients:[{name:"Strongly brewed green tea",amount:"2 tablespoons",notes:"Cooled completely"},{name:"Turmeric powder",amount:"1/4 teaspoon",notes:"Use a pinch only — less is more"},{name:"Aloe vera gel",amount:"1 tablespoon",notes:null},{name:"Vitamin E oil",amount:"2-3 drops",notes:"Optional but recommended"}],instructions:["Brew a strong cup of green tea and let it cool completely.","In a small bowl, mix 2 tablespoons of cooled tea with the aloe vera gel.","Add just a pinch of turmeric powder and stir well.","Add vitamin E oil if using.","After cleansing your face, apply a few drops to skin and press in gently.","Let absorb fully before applying moisturizer."],applicationMethod:"Apply 4-5 drops to clean skin morning or evening. Press gently into skin, do not rub.",prepTime:"5 minutes",duration:"5 minutes absorption",frequency:"Daily",tips:["Turmeric can stain fabric — apply at night and use an old pillowcase","Start with a tiny amount of turmeric to gauge skin reaction","The slight golden tint disappears as it absorbs"],cautions:["Turmeric temporarily stains skin yellow — wash with soap if excess appears","May increase sun sensitivity — use SPF in the morning"],featured:true},
+  {id:6,title:"Rosemary Scalp Stimulating Oil",description:"A clinically-backed hair growth treatment. Studies show rosemary oil is as effective as minoxidil for regrowing hair, stimulating follicles and increasing circulation to the scalp.",plantIds:[7],plantNames:["Rosemary"],areaId:7,areaName:"Scalp",treatmentType:"oil",ingredients:[{name:"Fresh rosemary sprigs",amount:"4-5 sprigs",notes:"Or 10 drops rosemary essential oil"},{name:"Carrier oil (olive, jojoba, or coconut)",amount:"3 tablespoons",notes:null},{name:"Peppermint leaves",amount:"5-6 leaves",notes:"Optional for extra stimulation"}],instructions:["Gently bruise the fresh rosemary sprigs between your fingers to release the oils.","Warm the carrier oil in a small saucepan over very low heat — do not boil.","Add rosemary sprigs and peppermint if using. Infuse on lowest heat for 20 minutes.","Remove from heat and let cool. Strain out the plant material.","Part your hair into sections and apply the oil directly to the scalp.","Massage firmly for 5-10 minutes using circular motions.","Leave on for at least 1 hour, or overnight with a shower cap.","Shampoo out thoroughly."],applicationMethod:"Apply to scalp sections, massage for 5-10 minutes, leave on 1+ hours, then shampoo.",prepTime:"25 minutes (plus infusion)",duration:"1 hour minimum",frequency:"Twice weekly",tips:["Consistency is key — results appear after 4-6 weeks of regular use","The scalp massage is as important as the rosemary itself","Store infused oil in a dark bottle for up to 2 weeks"],cautions:["Do not apply to broken or irritated scalp","Do a patch test before first use"],featured:true},
+  {id:7,title:"Cucumber & Mint Cooling Face Toner",description:"A refreshing, pore-tightening toner perfect for hot days or after exercise. Cucumber hydrates while mint tightens pores and controls excess oil.",plantIds:[8,5],plantNames:["Cucumber","Mint"],areaId:1,areaName:"Face",treatmentType:"toner",ingredients:[{name:"Fresh cucumber",amount:"1/2 medium cucumber",notes:"No need to peel"},{name:"Fresh mint leaves",amount:"10 large leaves",notes:null},{name:"Witch hazel",amount:"1 tablespoon",notes:"Optional for oily skin"},{name:"Water",amount:"1/4 cup",notes:null}],instructions:["Blend the cucumber and mint leaves with water until smooth.","Strain through a fine mesh sieve or cheesecloth, pressing to extract all liquid.","Add witch hazel if you have oily or combination skin.","Pour into a clean spray bottle or jar.","After cleansing, apply to face with a cotton pad or spray directly on skin.","Pat gently — do not rub."],applicationMethod:"Apply to clean skin with cotton pad or spray bottle. Pat gently, do not rub. No rinse needed.",prepTime:"5 minutes",duration:"1-2 minutes to absorb",frequency:"Morning and evening",tips:["Store in the refrigerator — cold toner feels amazing on skin","Shake before each use","Use within 5 days when refrigerated"],cautions:["Avoid getting in eyes","Use organic cucumber when possible to avoid pesticide residue"],featured:false},
+  {id:8,title:"Hibiscus Anti-Aging Face Tea Rinse",description:"Use hibiscus's natural AHAs to gently exfoliate, firm, and brighten skin. This daily face rinse is like a gentle chemical peel from your garden.",plantIds:[10],plantNames:["Hibiscus"],areaId:1,areaName:"Face",treatmentType:"rinse",ingredients:[{name:"Dried hibiscus flowers (or fresh)",amount:"3 tablespoons",notes:null},{name:"Boiling water",amount:"2 cups",notes:null},{name:"Rose water",amount:"1 tablespoon",notes:"Optional for extra glow"}],instructions:["Steep hibiscus flowers in boiling water for 15 minutes.","Let cool to room temperature. Add rosewater if using.","After your normal cleansing routine, lean over the bowl and splash your face with the hibiscus water.","Alternatively, soak a cloth and press to face for 2-3 minutes.","Do not rinse off — let it air dry on your skin.","Follow with your regular moisturizer."],applicationMethod:"Splash onto face or apply with cloth after cleansing. Leave on skin — no rinse needed.",prepTime:"15 minutes (steeping)",duration:"2-3 minutes",frequency:"Daily",tips:["The deeper the red color, the more antioxidants in your rinse","Make a large batch and refrigerate for up to 5 days"],cautions:["Hibiscus is a mild AHA — increase frequency gradually to avoid over-exfoliation"],featured:false},
+  {id:9,title:"Calendula Healing Hand Cream",description:"A deeply restorative hand treatment that uses calendula's powerful skin-repair compounds to heal cracked, dry hands and strengthen brittle nails.",plantIds:[6],plantNames:["Calendula"],areaId:9,areaName:"Hands",treatmentType:"serum",ingredients:[{name:"Dried calendula petals",amount:"1/4 cup",notes:null},{name:"Coconut oil",amount:"3 tablespoons",notes:"Extra virgin"},{name:"Beeswax pellets",amount:"1 tablespoon",notes:"Or shea butter for vegan option"},{name:"Almond oil",amount:"1 tablespoon",notes:null},{name:"Lavender essential oil",amount:"5 drops",notes:"Optional"}],instructions:["Infuse calendula petals in coconut and almond oil over very low heat for 30 minutes.","Strain out the petals.","Melt beeswax (or shea butter) into the warm infused oil.","Let cool slightly, then add lavender essential oil if using.","Pour into a small tin or jar before it solidifies.","Let set for 1 hour before use.","Apply generously to hands and nails, especially before bed."],applicationMethod:"Apply generously to hands, massaging into nails and cuticles. Best used at bedtime with cotton gloves.",prepTime:"45 minutes",duration:"Overnight",frequency:"Nightly",tips:["Wearing cotton gloves overnight makes this treatment deeply effective","Focus on cuticles and nails for strength benefits","Calendula cream lasts up to 3 months stored in a cool place"],cautions:["Test for beeswax allergy if you have bee/pollen sensitivities","Avoid eyes"],featured:false},
+  {id:10,title:"Turmeric Brightening Body Scrub",description:"An Ayurvedic-inspired full body scrub that exfoliates, brightens, and evens skin tone. The golden paste technique used in India for centuries.",plantIds:[9,15],plantNames:["Turmeric","Honey"],areaId:11,areaName:"Body Skin",treatmentType:"scrub",ingredients:[{name:"Turmeric powder",amount:"1 teaspoon",notes:null},{name:"Raw honey",amount:"2 tablespoons",notes:null},{name:"Plain yogurt",amount:"3 tablespoons",notes:"Lactic acid exfoliates"},{name:"Coarse sea salt or sugar",amount:"2 tablespoons",notes:null},{name:"Lemon juice",amount:"1 teaspoon",notes:"Optional for extra brightening"}],instructions:["Mix all ingredients in a bowl to form a thick paste.","In the shower, apply to wet skin in circular motions starting from feet and moving upward.","Spend extra time on knees, elbows, and anywhere with uneven skin tone.","Let the paste sit on skin for 3-5 minutes.","Rinse thoroughly. Your skin will have a warm golden glow — this is temporary.","Pat dry and apply body oil or moisturizer while skin is still slightly damp."],applicationMethod:"Apply to wet skin in circular motions in the shower. Leave 3-5 minutes, then rinse.",prepTime:"5 minutes",duration:"3-5 minutes",frequency:"Weekly",tips:["Wear old clothes or a dark towel — turmeric stains fabric","The golden skin tone fades within 30-60 minutes after rinsing"],cautions:["Turmeric temporarily stains skin and surfaces","Avoid on open wounds or broken skin","May increase sun sensitivity"],featured:true},
+  {id:11,title:"Hibiscus Anti-Aging Beauty Tea",description:"A daily drinkable beauty treatment loaded with vitamin C and anthocyanins that stimulate collagen production, fight free radicals, and give skin a natural radiance.",plantIds:[10],plantNames:["Hibiscus"],areaId:16,areaName:"Anti-Aging (Internal)",treatmentType:"tea",ingredients:[{name:"Dried hibiscus flowers",amount:"2 tablespoons",notes:"Or 2 hibiscus tea bags"},{name:"Boiling water",amount:"2 cups",notes:null},{name:"Rose hips",amount:"1 teaspoon",notes:"Optional for extra vitamin C"},{name:"Raw honey",amount:"1-2 teaspoons",notes:"To taste"},{name:"Fresh lemon slice",amount:"1 slice",notes:"Enhances vitamin C absorption"}],instructions:["Bring water to a boil.","Add hibiscus flowers and rose hips if using.","Steep for 10-15 minutes for maximum antioxidant extraction.","Strain into your favorite cup.","Add lemon and honey to taste.","Drink warm or pour over ice for a refreshing cold version."],applicationMethod:"Drink 1-2 cups daily. Best taken in the morning or between meals for optimal absorption.",prepTime:"15 minutes",duration:"Daily ritual",frequency:"Once or twice daily",tips:["Hibiscus tea is naturally tart and refreshing — adjust honey to taste","Results in skin radiance are typically visible after 4-6 weeks of daily consumption"],cautions:["Hibiscus may lower blood pressure — consult doctor if you have hypotension","Avoid in high doses during pregnancy"],featured:true},
+  {id:12,title:"Lavender Calming Bath Soak",description:"A full-body relaxation treatment that also softens skin, reduces inflammation, and encourages the body's natural repair processes through a mineral-rich herbal bath.",plantIds:[3],plantNames:["Lavender"],areaId:13,areaName:"Bath & Soak",treatmentType:"bath",ingredients:[{name:"Fresh or dried lavender flowers",amount:"1 cup",notes:"Or 15 drops lavender essential oil"},{name:"Epsom salts",amount:"2 cups",notes:"Draws out toxins, relaxes muscles"},{name:"Baking soda",amount:"1/2 cup",notes:"Softens water and skin"},{name:"Oats (rolled)",amount:"1/2 cup",notes:"Tie in a muslin bag for a skin-softening milk bath"}],instructions:["Fill your tub with warm (not hot) water.","Add the Epsom salts and baking soda and let dissolve.","If using fresh lavender, tie it in a muslin bag or let it float freely.","Add the oat bag — squeeze it gently in the water to release its milky liquid.","If using essential oil, add drops just before getting in.","Soak for 20-30 minutes.","Pat skin dry — do not rinse so the magnesium from the Epsom salts can absorb."],applicationMethod:"Soak for 20-30 minutes. Pat dry without rinsing to preserve skin-softening benefits.",prepTime:"5 minutes",duration:"20-30 minutes",frequency:"Weekly",tips:["Add rose petals or calendula flowers for extra skin benefits and beauty","The magnesium in Epsom salts absorbs through skin to relax muscles and aid sleep"],cautions:["Keep bath temperature warm, not hot — hot water strips skin of natural oils","Do not use on broken or irritated skin"],featured:true},
+  {id:13,title:"Pumpkin Enzyme Brightening Face Mask",description:"Pumpkin flesh is nature's gentle chemical peel. Its natural enzymes dissolve dead skin cells while beta-carotene floods skin with antioxidants — leaving you with visibly brighter, smoother skin.",plantIds:[21],plantNames:["Pumpkin"],areaId:1,areaName:"Face",treatmentType:"mask",ingredients:[{name:"Fresh pumpkin flesh (cooked and mashed)",amount:"3 tablespoons",notes:"Canned 100% pumpkin also works"},{name:"Raw honey",amount:"1 tablespoon",notes:null},{name:"Plain yogurt",amount:"1 tablespoon",notes:"Lactic acid enhances exfoliation"},{name:"Cinnamon",amount:"1 pinch",notes:"Optional — stimulates circulation"}],instructions:["Mash cooked pumpkin until completely smooth with no lumps.","Mix in honey, yogurt, and cinnamon if using.","Apply a generous layer to clean, dry skin.","Leave on for 15-20 minutes — you may feel a gentle tingling as the enzymes work.","Rinse with warm water and follow with cool water to close pores.","Your skin will look noticeably brighter immediately."],applicationMethod:"Apply to clean face, avoid eyes. Leave 15-20 minutes. Rinse with warm then cool water.",prepTime:"5 minutes",duration:"15-20 minutes",frequency:"Once weekly",tips:["Pumpkin seed oil (pressed from seeds) is equally effective as a daily face oil for anti-aging","Canned pumpkin works perfectly — look for 100% pure pumpkin, no additives"],cautions:["Do a patch test — some people are sensitive to pumpkin enzymes","Avoid on broken or inflamed skin"],featured:true},
+  {id:14,title:"Beet Lip & Cheek Stain",description:"The most beautiful natural makeup you can make. Beet's vivid betalain pigment creates a long-wearing, buildable stain in the most flattering rose-mauve tone that suits every skin tone.",plantIds:[23],plantNames:["Beet"],areaId:3,areaName:"Lips",treatmentType:"serum",ingredients:[{name:"Raw beet (or cooked)",amount:"1 small",notes:"Raw gives more intense color"},{name:"Coconut oil",amount:"1 teaspoon",notes:"Carrier and moisturizer"},{name:"Beeswax pellets",amount:"1/2 teaspoon",notes:"Makes it into a tinted balm"}],instructions:["Grate or juice the beet and collect the juice.","Melt coconut oil and beeswax together gently.","Stir in 1-2 teaspoons of beet juice — more for deeper color.","Pour into a small tin or lip pot.","Allow to set for 1 hour.","Apply to lips and lightly to cheeks for a coordinated flush of color."],applicationMethod:"Apply to lips with fingertip or small brush. Pat a tiny amount onto cheek apples for flush.",prepTime:"15 minutes (plus setting)",duration:"8+ hours",frequency:"Daily as desired",tips:["The color deepens as it oxidizes — apply lightly and build up","A drop of pomegranate juice mixed in deepens the color to a berry tone"],cautions:["Beet juice stains clothing and surfaces — handle carefully"],featured:true},
+  {id:15,title:"Beet & Carrot Glow Beauty Juice",description:"An internal beauty treatment of extraordinary power. Beet clears the liver, carrot floods blood with beta-carotene, and the combination creates the most radiant skin possible from the inside out.",plantIds:[23,36],plantNames:["Beet","Carrot"],areaId:14,areaName:"Complexion (Internal)",treatmentType:"drink",ingredients:[{name:"Raw beet",amount:"1 medium",notes:"No need to peel if organic"},{name:"Carrots",amount:"3 large",notes:null},{name:"Fresh ginger",amount:"1 inch piece",notes:"Anti-inflammatory"},{name:"Lemon",amount:"1/2",notes:"Vitamin C enhances iron absorption"},{name:"Apple",amount:"1",notes:"Optional sweetener"}],instructions:["Wash all produce thoroughly.","Run everything through a juicer, or blend and strain through a nut milk bag.","Stir and drink immediately for maximum nutrient retention.","If the taste is too earthy, add more apple or carrot to balance.","Drink on an empty stomach for best absorption."],applicationMethod:"Drink 1 cup (240ml) fresh daily, ideally in the morning on an empty stomach.",prepTime:"10 minutes",duration:"Daily ritual",frequency:"Daily for at least 4 weeks",tips:["The combination of beet and carrot is one of the most studied pairs for skin radiance","The skin improvement from this juice is visible to others within 2-3 weeks"],cautions:["Beet is high in oxalates — limit if prone to kidney stones","May temporarily lower blood pressure"],featured:true},
+  {id:16,title:"Watermelon & Mint Summer Bath Soak",description:"A luxurious summer bath that combines the extreme hydration of watermelon with the cooling invigoration of mint. Skin so soft and glowing it looks like you've had a professional treatment.",plantIds:[24,5],plantNames:["Watermelon","Mint"],areaId:13,areaName:"Bath & Soak",treatmentType:"bath",ingredients:[{name:"Watermelon flesh (blended)",amount:"2 cups",notes:"Blend into juice"},{name:"Fresh mint leaves",amount:"1 large bunch",notes:null},{name:"Epsom salts",amount:"1 cup",notes:null},{name:"Sea salt",amount:"1/2 cup",notes:null},{name:"Coconut oil",amount:"2 tablespoons",notes:"Melted"}],instructions:["Blend watermelon flesh into juice — strain if desired or leave with some pulp.","Fill tub with warm (not hot) water.","Add Epsom salts, sea salt, and coconut oil.","Add watermelon juice directly to the water.","Bruise mint leaves between your palms and add to the bath.","Soak for 20-25 minutes.","Pat skin dry gently — the natural oils will remain on skin."],applicationMethod:"Soak in warm watermelon-mint bath for 20-25 minutes. Pat gently dry — leave skin slightly dewy.",prepTime:"10 minutes",duration:"20-25 minutes",frequency:"Weekly",tips:["The citrulline in watermelon absorbs through skin during bathing and improves circulation","Add a handful of rose petals on top of the water for the ultimate sensory experience"],cautions:["Keep water temperature moderate","Rinse tub promptly after use as watermelon can leave residue"],featured:true},
+  {id:17,title:"Strawberry Brightening Face Mask",description:"A vitamin C powerhouse mask that fades dark spots, brightens dull skin, and gently exfoliates with natural fruit acids. Strawberries contain ellagic acid that specifically blocks the enzyme responsible for dark spot production.",plantIds:[27,15],plantNames:["Strawberry","Honey"],areaId:1,areaName:"Face",treatmentType:"mask",ingredients:[{name:"Fresh strawberries",amount:"5-6 ripe berries",notes:null},{name:"Raw honey",amount:"1 tablespoon",notes:null},{name:"Plain yogurt",amount:"1 tablespoon",notes:"Lactic acid enhances glow"}],instructions:["Mash strawberries until smooth — some small pieces are fine.","Mix in honey and yogurt.","Apply to clean skin in an even layer.","Leave for 15 minutes.","Rinse with cool water.","Your skin will look instantly brighter and feel softer."],applicationMethod:"Apply to clean face. Leave 15 minutes. Rinse with cool water. Glow immediately.",prepTime:"5 minutes",duration:"15 minutes",frequency:"2-3 times weekly",tips:["Deep red strawberries have the most ellagic acid — the better the strawberry, the better the mask","Use stems and all — the hull area close to the stem is richest in vitamin C"],cautions:["Avoid if allergic to strawberries or salicylates","Apply SPF the next morning as fruit acids increase sun sensitivity"],featured:true},
+  {id:18,title:"Pineapple Bromelain Enzyme Face Peel",description:"Pineapple's bromelain enzyme is clinically recognized as a proteolytic exfoliant that dissolves dead skin protein with surgical precision. The garden's answer to a professional chemical peel.",plantIds:[43],plantNames:["Pineapple"],areaId:1,areaName:"Face",treatmentType:"mask",ingredients:[{name:"Fresh pineapple (core section)",amount:"2 thick slices",notes:"The core contains the most bromelain"},{name:"Raw honey",amount:"1 tablespoon",notes:"Soothes and slows enzyme action — essential buffer"},{name:"Plain yogurt",amount:"1 tablespoon",notes:"Lactic acid synergist"},{name:"Rolled oats (fine)",amount:"1 teaspoon",notes:"Buffers for sensitive skin — optional"}],instructions:["Blend pineapple into smooth puree — core preferred.","Mix with honey and yogurt. Honey is essential — it buffers the bromelain so the mask is not too aggressive.","Apply a thin layer to clean skin.","Set a timer — 8 minutes maximum for first use, 10-12 for experienced users.","Rinse immediately when time is up with cool water.","Your skin will look noticeably smoother and brighter the same evening."],applicationMethod:"Apply thin layer, set a timer for 8-10 minutes. Rinse immediately with cool water. Do not leave longer.",prepTime:"5 minutes",duration:"8-10 minutes maximum",frequency:"Once per week maximum",tips:["Never exceed 10-12 minutes — bromelain is powerful and over-exposure irritates skin","The honey buffer is not optional — always include it"],cautions:["Do not use on broken, inflamed, or sunburned skin","Patch test inner wrist first — bromelain is potent","Apply SPF the next day — freshly resurfaced skin is photosensitive"],featured:true},
+  {id:19,title:"Beet & Rose Natural Liquid Lip Stain",description:"A deeply pigmented, long-wearing liquid lip color made entirely from garden plants. Beet's vivid betalain dye and rose's rosy undertone create a buildable stain that lasts 4-6 hours.",plantIds:[23,2],plantNames:["Beet","Rose"],areaId:18,areaName:"Lips (Makeup)",treatmentType:"serum",ingredients:[{name:"Raw beet juice (freshly pressed)",amount:"2 teaspoons",notes:"Grate and squeeze through cloth for deepest color"},{name:"Rose petal infused water",amount:"1 teaspoon",notes:"Steep red petals 20 min, strain"},{name:"Castor oil",amount:"1 tablespoon",notes:"Creates staying power and plumps lips"},{name:"Vitamin E oil",amount:"3 drops",notes:"Conditions and preserves"},{name:"Beeswax pellets",amount:"1/2 teaspoon",notes:"Optional — for a more balm-like finish"}],instructions:["Press beet juice through a fine cloth — deep red varieties give the most intense color.","Steep crushed red rose petals in warm water for 20 minutes, strain.","Combine castor oil, beet juice, rose water, and vitamin E.","Stir in melted beeswax if using. Pour into a small glass pot.","Let set 45 minutes. For liquid version, skip the beeswax.","Apply to lips with a lip brush or fingertip. Build layers for deeper color."],applicationMethod:"Apply one layer for sheer berry tint. Build 2-3 layers for deep stain.",prepTime:"15 minutes (plus setting)",duration:"4-6 hours",frequency:"Daily as desired",tips:["The stain deepens and shifts from bright pink to mauve as it oxidizes on lips — both stages are beautiful","This is completely edible and safe — no synthetic dyes, no parabens"],cautions:["Beet juice stains fabric and surfaces — handle with care","Test color on fingertip first — the shade shifts slightly on each skin tone"],featured:true},
+  {id:20,title:"Carrot & Turmeric Natural Liquid Foundation",description:"A true garden-made liquid foundation that provides sheer-to-medium buildable coverage, evens skin tone, and actively nourishes skin while you wear it.",plantIds:[36,9],plantNames:["Carrot","Turmeric"],areaId:20,areaName:"Full Face (Makeup)",treatmentType:"serum",ingredients:[{name:"Carrot juice (freshly pressed)",amount:"1 teaspoon",notes:"Adjusts warmth and coverage depth"},{name:"Turmeric powder",amount:"1 small pinch (1/16 tsp)",notes:"Start tiny — it is very potent"},{name:"Aloe vera gel",amount:"2 tablespoons",notes:"The base — creates skin-like texture"},{name:"Arrowroot powder",amount:"1 teaspoon",notes:"Sets the foundation and controls shine"},{name:"Jojoba oil",amount:"1/2 teaspoon",notes:"Seamless skin blend"},{name:"Zinc oxide powder",amount:"1/2 teaspoon",notes:"Optional — adds SPF and coverage"}],instructions:["Combine aloe vera gel and jojoba oil — mix until fully emulsified.","Add arrowroot powder and stir until no lumps remain.","Add just a tiny pinch of turmeric — start with the smallest amount possible.","Mix in carrot juice one drop at a time, checking shade against your inner arm.","Add zinc oxide if using.","Test the color on your jaw in natural light.","Apply with a damp sponge or fingertips using stippling motions."],applicationMethod:"Apply with damp sponge using stippling motions. Build where needed. Set with arrowroot powder.",prepTime:"10 minutes",duration:"4-6 hours wear",frequency:"Daily as desired",tips:["Your skin undertone determines how much carrot vs turmeric to use","This foundation actually improves skin condition with daily wear — it is skincare and makeup in one","Store in a small glass jar in the refrigerator for up to 5 days"],cautions:["Turmeric can stain fabric and skin if over-applied — use sparingly","Shake or stir before each use as natural ingredients settle"],featured:true},
+  {id:21,title:"Cocoa & Cinnamon Natural Bronzer",description:"A silky, buildable bronzing powder from your spice garden that warms, sculpts, and adds the most natural sun-kissed depth to any skin tone.",plantIds:[9],plantNames:["Turmeric"],areaId:19,areaName:"Cheeks & Eyes (Makeup)",treatmentType:"serum",ingredients:[{name:"Raw cacao powder",amount:"2 tablespoons",notes:"100% pure — this is your darkest pigment"},{name:"Arrowroot powder",amount:"2 tablespoons",notes:"The silky base"},{name:"Cinnamon powder",amount:"1 teaspoon",notes:"Adds warmth and stimulates circulation"},{name:"Turmeric powder",amount:"1 pinch",notes:"Adds golden warmth — use very sparingly"},{name:"Mica powder (gold or bronze)",amount:"1 teaspoon",notes:"Optional — adds luminous glow"},{name:"Jojoba or argan oil",amount:"3-4 drops",notes:"Binds into a pressed powder"}],instructions:["Sift all dry ingredients together into a bowl — remove any lumps.","Start with the base ratio: 2 parts arrowroot to 1 part cacao.","Add turmeric just a pinch at a time — test on your jaw between additions.","Add mica powder if making a luminous bronzer.","Drizzle in oil drops and stir vigorously — the mixture should hold together when pinched.","Press firmly into a small tin or compact.","Let set overnight before use.","Apply with a fluffy brush to the areas the sun naturally hits."],applicationMethod:"Dust onto forehead, cheekbones, nose bridge, and chin with a fluffy brush. Build gradually.",prepTime:"15 minutes (plus overnight setting)",duration:"6-8 hours",frequency:"Daily as desired",tips:["The ratio of cacao to arrowroot controls depth — more cacao for deeper tones","This bronzer is pressed so gently that it releases on the skin exactly like a luxury product"],cautions:["Cinnamon can irritate very sensitive skin — patch test first","Use only cosmetic-grade mica if adding shimmer"],featured:true},
+  {id:22,title:"Beet & Cornflower Natural Cheek Blush",description:"A garden-harvested powder blush in the most universally flattering rose-pink tone. Beet powder provides vivid, long-lasting pigment while cornflower petal powder softens it into a wearable flush.",plantIds:[23,29],plantNames:["Beet","Cornflower"],areaId:19,areaName:"Cheeks & Eyes (Makeup)",treatmentType:"serum",ingredients:[{name:"Dried beet powder",amount:"1 teaspoon",notes:"Dry beet slices completely, then powder in a spice grinder"},{name:"Dried cornflower petals (powdered)",amount:"1 teaspoon",notes:"Grind dry petals fine"},{name:"Arrowroot powder",amount:"3 tablespoons",notes:"The pale base that controls intensity"},{name:"Rose clay",amount:"1 teaspoon",notes:"Optional — adds pinkish tone and skin-softening minerals"},{name:"Jojoba oil",amount:"2-3 drops",notes:"Binds for pressed powder"}],instructions:["Dry beet slices completely in a low oven (80°C) or dehydrator until bone dry.","Grind dried beet and cornflower petals separately into fine powder.","Sift together with arrowroot and rose clay.","Check color on your cheekbone — adjust beet powder for deeper pigment.","Add jojoba oil drops and stir until mixture holds together when pinched.","Press into a compact tin overnight.","Apply to the apples of cheeks, sweep up toward temples with a fluffy blush brush."],applicationMethod:"Smile and dust onto the apples of cheeks with a fluffy brush. Blend upward toward temples.",prepTime:"20 minutes (plus drying and setting time)",duration:"5-7 hours",frequency:"Daily as desired",tips:["For a more coral tone, add a tiny pinch of turmeric to the mixture","This blush actually contains minerals that tighten and tone the cheek skin underneath"],cautions:["Beet stains — use a dedicated brush and avoid touching fabric","Dry beet powder keeps up to 6 months in an airtight jar"],featured:false},
+  {id:23,title:"Celosia & Beet Natural Lip & Cheek Multi-Stick",description:"A vivid, versatile color stick in deep fuchsia-magenta that works on lips and cheeks equally beautifully. Celosia's betacyanin pigment is more stable than beet alone, giving longer wear.",plantIds:[48,23],plantNames:["Celosia (Neon Blossom)","Beet"],areaId:18,areaName:"Lips (Makeup)",treatmentType:"serum",ingredients:[{name:"Dried celosia flowers (deep pink or red variety)",amount:"2 tablespoons",notes:"Steep in warm oil to extract color"},{name:"Beet juice (fresh)",amount:"1 teaspoon",notes:null},{name:"Beeswax pellets",amount:"1 tablespoon",notes:"Creates the stick structure"},{name:"Shea butter",amount:"1 tablespoon",notes:"Creamy base"},{name:"Castor oil",amount:"2 teaspoons",notes:"Gloss and staying power"}],instructions:["Warm castor oil gently and steep dried celosia petals in it for 30 minutes off heat. Strain.","Melt beeswax and shea butter together in a double boiler.","Remove from heat and stir in the celosia-infused oil and beet juice.","Pour immediately into lip balm tubes or a small tin before it sets.","Cool at room temperature for 1 hour, then refrigerate for 30 minutes.","Dab on lips and tap remainder onto cheeks for a coordinated flush."],applicationMethod:"Apply to lips directly. For cheeks, dot a tiny amount on fingertip and tap onto cheek apples.",prepTime:"45 minutes (including infusion and setting)",duration:"4-5 hours on lips",frequency:"Daily as desired",tips:["The celosia-beet combination creates a color that stays brighter longer than beet alone","Press a tissue to lips after first application to set the stain for longer wear"],cautions:["Contains beeswax — use candelilla for vegan version","Celosia pigment can stain — handle carefully"],featured:true},
+  {id:24,title:"Eggplant Blossom & Violet Natural Eye Shadow",description:"The delphinidin-rich eggplant blossoms and violet flowers create a soft, buildable mauve-lilac eye shadow that is genuinely wearable and made of garden pigments so pure you could eat them.",plantIds:[53,40],plantNames:["Eggplant Blossom","Violet"],areaId:19,areaName:"Cheeks & Eyes (Makeup)",treatmentType:"serum",ingredients:[{name:"Dried eggplant blossoms (powdered)",amount:"1 teaspoon",notes:"Dry completely — grind very fine"},{name:"Dried violet flowers (powdered)",amount:"1 teaspoon",notes:null},{name:"Arrowroot powder",amount:"3 tablespoons",notes:"Silky base"},{name:"Mica powder (purple or lavender)",amount:"1 teaspoon",notes:"Optional for shimmer"},{name:"Argan or jojoba oil",amount:"2-3 drops",notes:"Binds for pressed shadow"}],instructions:["Dry eggplant blossoms and violet flowers completely at very low heat.","Grind each to a fine powder in a spice grinder — sift through a fine mesh.","Combine with arrowroot and mica if using.","Add oil drops and press into a small tin or eyeshadow pan.","Set overnight before use.","Apply dry for a subtle wash of color; apply over a dab of aloe vera gel for a more intense effect."],applicationMethod:"Apply dry for subtle color. Press over a tiny aloe base for deeper, more pigmented effect.",prepTime:"25 minutes (plus drying and setting)",duration:"4-6 hours",frequency:"Daily as desired",tips:["Applying garden-pigment eyeshadow over a base of shea butter or aloe intensifies the color dramatically","The delphinidin in eggplant blossom shifts from grey to purple-blue depending on skin pH"],cautions:["Keep out of eyes — use on lids only, not inside the lash line","Ensure all flowers are completely dried before powdering to prevent mold"],featured:false},
+  {id:25,title:"Fig & Honey Natural Lip Plumping Gloss",description:"Fig's ficin enzyme gently dissolves dead lip skin cells while honey's natural sugars act as powerful humectants. The result is genuinely plumper, softer lips with a natural rosy gloss.",plantIds:[51,15],plantNames:["Fig","Honey"],areaId:18,areaName:"Lips (Makeup)",treatmentType:"serum",ingredients:[{name:"Ripe fig (just the soft flesh)",amount:"1 small fig",notes:"Fully ripe gives most ficin activity"},{name:"Raw honey",amount:"1 tablespoon",notes:null},{name:"Castor oil",amount:"1 teaspoon",notes:"Natural lip plumper"},{name:"Peppermint essential oil",amount:"1 drop",notes:"Tingling plumping sensation"},{name:"Vitamin E oil",amount:"2 drops",notes:null}],instructions:["Mash the fig flesh into a completely smooth puree — no skin or seeds.","Strain through a fine cloth to get pure juice and pulp.","Combine 1 teaspoon of fig puree with honey, castor oil, vitamin E, and peppermint oil.","Mix until silky.","Apply to lips with a fingertip or brush.","For the plumping effect, apply and leave for 10 minutes before blotting lightly."],applicationMethod:"Apply to lips. For plumping, leave 10 minutes then blot. Reapply as gloss throughout the day.",prepTime:"8 minutes",duration:"All day as reapplied",frequency:"Daily",tips:["The mild tingling from peppermint confirms the plumping action is working","Ripe (almost overripe) figs have the most ficin enzyme activity"],cautions:["Peppermint oil can irritate sensitive lips — reduce to a half drop or omit","Do not apply to cracked or bleeding lips"],featured:false},
+  {id:26,title:"Pineapple & Arrowroot Natural Illuminating Primer",description:"A glow-enhancing skin primer made with bromelain-clarified pineapple juice and skin-smoothing arrowroot. Creates a luminous, pore-blurred base that makes everything applied on top look better.",plantIds:[43],plantNames:["Pineapple"],areaId:20,areaName:"Full Face (Makeup)",treatmentType:"serum",ingredients:[{name:"Fresh pineapple juice",amount:"2 teaspoons",notes:"From the core — most concentrated in bromelain"},{name:"Aloe vera gel",amount:"2 tablespoons",notes:"Primer base"},{name:"Arrowroot powder",amount:"1 teaspoon",notes:"Blurs pores and sets"},{name:"Rosehip oil",amount:"3 drops",notes:"Glowing finish"},{name:"Mica powder (gold or pearl)",amount:"1/4 teaspoon",notes:"Optional for luminous glow"}],instructions:["Mix aloe vera gel with arrowroot powder until completely smooth.","Add pineapple juice — just the two teaspoons; more makes it too active.","Add rosehip oil and mica if using.","Stir until silky and consistent.","Apply a thin, even layer all over clean moisturized skin.","Wait 2 minutes for it to set and slightly grip skin.","Apply your natural foundation or powder on top."],applicationMethod:"Apply thin layer to moisturized skin. Wait 2 minutes to set. Apply makeup on top.",prepTime:"8 minutes",duration:"Sets in 2 minutes, wear all day",frequency:"Daily as desired",tips:["The pineapple bromelain gently exfoliates the surface while the primer sits — a dual-purpose product","The arrowroot creates a soft-focus, pore-blurring effect visible in photographs"],cautions:["Bromelain is a potent enzyme — do not leave primer on bare skin for more than 5 minutes before applying makeup","Make fresh — store up to 3 days in refrigerator"],featured:false},
+  {id:27,title:"Celosia & Rose Natural Setting Powder",description:"A finely milled setting powder in a warm rose tone that blurs pores, locks in natural makeup, and provides antioxidant skin benefits. Made entirely from garden flowers.",plantIds:[48,2],plantNames:["Celosia (Neon Blossom)","Rose"],areaId:20,areaName:"Full Face (Makeup)",treatmentType:"serum",ingredients:[{name:"Dried celosia petals (finely powdered)",amount:"1 teaspoon",notes:"Dry completely — grind very fine in a spice grinder"},{name:"Dried rose petals (powdered)",amount:"1 teaspoon",notes:null},{name:"Arrowroot powder",amount:"4 tablespoons",notes:"The soft, mattifying base"},{name:"Kaolin clay",amount:"1 teaspoon",notes:"Pore-blurring and oil-absorbing"}],instructions:["Dry celosia and rose petals completely at lowest oven setting.","Grind each to an extremely fine powder in a spice grinder — sift through a fine mesh.","Combine with arrowroot and kaolin clay.","Mix thoroughly until color is even.","Store in a small powder jar with a sifter lid or compact with a puff.","Apply over your natural foundation or directly on moisturized skin.","Dust on with a large fluffy brush using light circular motions."],applicationMethod:"Dust over foundation with a large fluffy brush. Tap off excess before applying — less is more.",prepTime:"20 minutes (plus drying time)",duration:"5-7 hours",frequency:"Daily as desired",tips:["The combination of celosia and rose creates a universally flattering rose-beige tone","This powder actually improves skin with daily wear — kaolin clay gently purifies pores"],cautions:["Grind flowers to the finest possible powder — any coarseness feels uncomfortable on skin","Ensure flowers are completely dry before grinding to prevent clumping"],featured:false},
+  {id:28,title:"Onion Juice Hair Growth Treatment",description:"One of the most extensively studied natural remedies. A 2002 clinical study showed 86.9% of patients with alopecia regrew hair after 6 weeks of twice-daily onion juice application.",plantIds:[42],plantNames:["Onion"],areaId:7,areaName:"Scalp",treatmentType:"serum",ingredients:[{name:"Red or yellow onion",amount:"1 large",notes:"Red onion gives slightly more quercetin"},{name:"Rosemary essential oil",amount:"5 drops",notes:"Synergistic hair growth compound"},{name:"Coconut oil",amount:"1 tablespoon",notes:"Optional — reduces smell and adds conditioning"}],instructions:["Grate the onion finely and squeeze the juice through a clean cloth — collect all juice.","Mix in rosemary essential oil and coconut oil if using.","Part hair into sections.","Apply juice directly to scalp using a cotton ball or dropper.","Massage firmly for 5 minutes.","Leave on for 30 minutes to 1 hour.","Shampoo thoroughly — twice if needed to remove onion smell."],applicationMethod:"Apply to scalp with cotton ball or dropper. Massage 5 minutes. Leave 30-60 minutes. Shampoo twice.",prepTime:"10 minutes",duration:"30-60 minutes",frequency:"Twice weekly for 3-6 months",tips:["The smell is completely gone once hair dries after shampooing","Consistency for a minimum of 6 weeks is required to see results"],cautions:["The smell is strong — apply before a shower and shampoo thoroughly twice","Patch test for scalp sensitivity","Avoid getting in eyes — onion juice causes significant irritation"],featured:true},
+  {id:29,title:"Carrot & Honey Glow Face Mask",description:"Carrots are one of the richest sources of beta-carotene in the garden. This warming mask evens skin tone, softens texture, and gives skin the most beautiful natural warmth.",plantIds:[36,15],plantNames:["Carrot","Honey"],areaId:1,areaName:"Face",treatmentType:"mask",ingredients:[{name:"Cooked carrot (steamed or boiled)",amount:"3 tablespoons mashed",notes:"Cook until very soft"},{name:"Raw honey",amount:"1 tablespoon",notes:null},{name:"Plain yogurt",amount:"1 tablespoon",notes:null},{name:"Turmeric powder",amount:"1 small pinch",notes:"Optional synergist"}],instructions:["Cook carrot until very soft and mash completely smooth — no lumps.","Mix in honey, yogurt, and turmeric if using.","Apply warm (not hot) to clean skin.","Leave for 20 minutes.","Rinse with warm water.","Your skin will have a warm, healthy glow immediately."],applicationMethod:"Apply warm to clean face. Leave 20 minutes. Rinse warm. Glow immediately follows.",prepTime:"15 minutes (cooking included)",duration:"20 minutes",frequency:"Weekly",tips:["Raw carrot juice applied directly to skin and left for 10 minutes is an equally effective quick treatment","Consuming carrots daily creates a subtle, beautiful warmth to skin tone over weeks"],cautions:["Do not apply hot carrot — let it cool to warm room temperature","A very slight orange tint on skin is temporary and washes off"],featured:true},
+  {id:30,title:"Kale Beauty Smoothie",description:"Consumed as a daily green beauty drink, kale's extraordinary nutrient density visibly transforms skin, hair, and nails. The most nutrient-dense beauty drink you can make from the garden.",plantIds:[38],plantNames:["Kale"],areaId:14,areaName:"Complexion (Internal)",treatmentType:"drink",ingredients:[{name:"Fresh kale (2-3 leaves)",amount:"1 large cup packed",notes:"Any variety — remove tough stems"},{name:"Cucumber",amount:"1/2",notes:"Hydration"},{name:"Green apple",amount:"1",notes:"Natural sweetener"},{name:"Lemon",amount:"1/2, juiced",notes:"Vitamin C and flavor"},{name:"Fresh ginger",amount:"1/2 inch",notes:"Anti-inflammatory"},{name:"Water or coconut water",amount:"1 cup",notes:null}],instructions:["Add all ingredients to a high-speed blender.","Blend on high for 60 seconds until completely smooth.","Taste and adjust — add more apple for sweetness, more lemon for brightness.","Drink immediately for maximum nutrient content.","Consume on an empty stomach or 30 minutes before breakfast for best absorption."],applicationMethod:"Drink 1 large glass (350-400ml) daily. Best consumed fresh within 30 minutes of blending.",prepTime:"5 minutes",duration:"Daily ritual",frequency:"Daily for visible results in 3-4 weeks",tips:["Add a tablespoon of ground flaxseeds for omega-3 fatty acids that specifically benefit skin barrier","Consistent daily consumption is the secret"],cautions:["Kale contains vitamin K which can interact with blood thinners","Those with thyroid conditions should cook kale rather than eat raw"],featured:false}
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────
+let selectedPlantIds = new Set();
+let selectedAreaId = null;
+let currentPage = 'page-home';
+let pageHistory = [];
+
+// ─── NAVIGATION ───────────────────────────────────────────────────────
+function goPage(pageId, pushHistory=true) {
+  if(pushHistory && currentPage !== pageId) pageHistory.push(currentPage);
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  currentPage = pageId;
+  window.scrollTo(0,0);
+  const back = document.getElementById('nav-back');
+  back.style.display = pageHistory.length > 0 ? 'flex' : 'none';
+  if(pageId==='page-recipes') renderFilteredRecipes();
+  if(pageId==='page-all-recipes') renderAllRecipes();
+}
+function navBack() {
+  if(pageHistory.length > 0) {
+    const prev = pageHistory.pop();
+    goPage(prev, false);
+  }
+}
+function goHome() { pageHistory=[]; goPage('page-home', false); }
+
+// ─── HELPERS ──────────────────────────────────────────────────────────
+function getTypeClass(t) {
+  if(['tea','drink','supplement'].includes(t)) return 'internal';
+  if(['mask','toner','scrub','serum','oil','rinse','bath'].includes(t)) return '';
+  if(t==='makeup') return 'makeup';
+  return '';
+}
+function getAreaCategory(areaId) {
+  const a = AREAS.find(x=>x.id===areaId);
+  if(!a) return '';
+  if(a.slug.includes('makeup')) return 'makeup';
+  if(a.category==='internal') return 'internal';
+  return '';
+}
+function plantById(id) { return PLANTS.find(p=>p.id===id); }
+function areaById(id) { return AREAS.find(a=>a.id===id); }
+
+// ─── HOME ─────────────────────────────────────────────────────────────
+function renderHome() {
+  // Featured recipes
+  const featured = RECIPES.filter(r=>r.featured).slice(0,6);
+  const el = document.getElementById('featured-recipes-list');
+  el.innerHTML = featured.map(r=>`
+    <div class="recipe-card" onclick="showRecipe(${r.id})">
+      <span class="rtype ${getAreaCategory(r.areaId)}">${r.treatmentType}</span>
+      <h3>${r.title}</h3>
+      <p>${r.description}</p>
+      <div class="recipe-meta">
+        <span>&#9679; ${r.areaName}</span>
+        <span>&#9679; ${r.prepTime}</span>
+        <span>&#9679; ${r.frequency}</span>
+      </div>
+    </div>
+  `).join('');
+
+  // Popular plants
+  const popular = PLANTS.filter(p=>p.popular);
+  const row = document.getElementById('popular-plants-row');
+  row.innerHTML = popular.map(p=>`
+    <div class="popular-chip" onclick="showPlant(${p.id})">
+      <span class="emoji">${p.emoji}</span>
+      <span class="pname">${p.name}</span>
+    </div>
+  `).join('');
+}
+
+// ─── DISCOVER ─────────────────────────────────────────────────────────
+function renderPlants(filter='') {
+  const grid = document.getElementById('plants-grid');
+  const filtered = PLANTS.filter(p=>
+    p.name.toLowerCase().includes(filter.toLowerCase()) ||
+    p.category.toLowerCase().includes(filter.toLowerCase())
+  );
+  grid.innerHTML = filtered.map(p=>`
+    <div class="plant-card ${selectedPlantIds.has(p.id)?'selected':''}" onclick="togglePlant(${p.id})" data-testid="plant-card-${p.id}">
+      <span class="emoji">${p.emoji}</span>
+      <div class="pname">${p.name}</div>
+      <div class="pcategory">${p.category}</div>
+    </div>
+  `).join('');
+  updateDiscoverCta();
+}
+function filterPlants() {
+  renderPlants(document.getElementById('plant-search').value);
+}
+function togglePlant(id) {
+  if(selectedPlantIds.has(id)) selectedPlantIds.delete(id);
+  else selectedPlantIds.add(id);
+  renderPlants(document.getElementById('plant-search').value);
+}
+function updateDiscoverCta() {
+  const cta = document.getElementById('discover-cta');
+  const hint = document.getElementById('discover-hint');
+  if(selectedPlantIds.size > 0) {
+    cta.style.display='flex';
+    hint.style.display='none';
+  } else {
+    cta.style.display='none';
+    hint.style.display='block';
+  }
+}
+
+// ─── TREAT ────────────────────────────────────────────────────────────
+function renderAreas() {
+  const groups = {face:'Face & Neck',hair:'Hair & Scalp',body:'Body & Skin',internal:'Internal & Wellness'};
+  const groupOrder = ['face','hair','body','internal'];
+  const container = document.getElementById('area-groups');
+  container.innerHTML = groupOrder.map(cat=>{
+    const areas = AREAS.filter(a=>a.category===cat);
+    if(!areas.length) return '';
+    return `
+      <div>
+        <div class="area-group-label">${groups[cat]}</div>
+        <div class="area-pills">
+          ${areas.map(a=>`
+            <div class="area-pill ${selectedAreaId===a.id?'selected':''}" onclick="selectArea(${a.id})">${a.name}</div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+function selectArea(id) {
+  selectedAreaId = id;
+  renderAreas();
+  setTimeout(()=>goPage('page-recipes'), 200);
+}
+
+// ─── RECIPES ──────────────────────────────────────────────────────────
+function renderFilteredRecipes() {
+  const area = areaById(selectedAreaId);
+  const subtitle = document.getElementById('recipes-subtitle');
+  const plantNames = [...selectedPlantIds].map(id=>plantById(id)?.name).filter(Boolean);
+  subtitle.textContent = `${plantNames.join(', ')} · ${area?.name||''}`;
+
+  const matching = RECIPES.filter(r=>{
+    const plantMatch = r.plantIds.some(id=>selectedPlantIds.has(id));
+    const areaMatch = !selectedAreaId || r.areaId===selectedAreaId;
+    return plantMatch && areaMatch;
+  });
+
+  const list = document.getElementById('recipes-list');
+  if(matching.length===0) {
+    list.innerHTML=`<div class="empty"><div class="big">🌱</div><p>No recipes found for this combination.<br/>Try selecting different plants or a different area.</p><br/><button class="btn btn-outline btn-sm" onclick="goPage('page-discover')">Change Plants</button></div>`;
+    return;
+  }
+  list.innerHTML = matching.map(r=>`
+    <div class="recipe-card" onclick="showRecipe(${r.id})">
+      <span class="rtype ${getAreaCategory(r.areaId)}">${r.treatmentType}</span>
+      <h3>${r.title}</h3>
+      <p>${r.description}</p>
+      <div class="recipe-meta">
+        <span>&#9651; ${r.prepTime}</span>
+        ${r.duration?`<span>&#10710; ${r.duration}</span>`:''}
+        <span>&#8635; ${r.frequency}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAllRecipes(filter='') {
+  const filtered = RECIPES.filter(r=>
+    r.title.toLowerCase().includes(filter.toLowerCase()) ||
+    r.description.toLowerCase().includes(filter.toLowerCase()) ||
+    r.plantNames.some(n=>n.toLowerCase().includes(filter.toLowerCase()))
+  );
+  document.getElementById('all-recipes-list').innerHTML = filtered.map(r=>`
+    <div class="recipe-card" onclick="showRecipe(${r.id})">
+      <span class="rtype ${getAreaCategory(r.areaId)}">${r.treatmentType}</span>
+      <h3>${r.title}</h3>
+      <p>${r.description}</p>
+      <div class="recipe-meta">
+        <span>&#9679; ${r.areaName}</span>
+        <span>&#9651; ${r.prepTime}</span>
+      </div>
+    </div>
+  `).join('');
+}
+function filterAllRecipes() {
+  renderAllRecipes(document.getElementById('recipe-search').value);
+}
+
+// ─── RECIPE DETAIL ────────────────────────────────────────────────────
+function showRecipe(id) {
+  const r = RECIPES.find(x=>x.id===id);
+  if(!r) return;
+  const content = document.getElementById('recipe-detail-content');
+  content.innerHTML = `
+    <div class="recipe-hero">
+      <span class="rtype">${r.treatmentType}</span>
+      <h1>${r.title}</h1>
+      <p>${r.description}</p>
+      <div class="recipe-chips">
+        ${r.plantNames.map(n=>`<span class="chip">${n}</span>`).join('')}
+        <span class="chip">${r.areaName}</span>
+      </div>
+    </div>
+    <div class="recipe-body">
+      <div class="meta-row">
+        <div class="meta-box"><div class="label">Prep Time</div><div class="value">${r.prepTime}</div></div>
+        <div class="meta-box"><div class="label">Frequency</div><div class="value">${r.frequency}</div></div>
+        ${r.duration?`<div class="meta-box"><div class="label">Duration</div><div class="value">${r.duration}</div></div>`:''}
+      </div>
+      <div class="apply-box">
+        <div class="label">How to Apply</div>
+        <p>${r.applicationMethod}</p>
+      </div>
+      <div class="detail-section">
+        <h4>Ingredients</h4>
+        ${r.ingredients.map(ing=>`
+          <div class="ingredient-item">
+            <div><div class="ing-name">${ing.name}</div>${ing.notes?`<div class="ing-note">${ing.notes}</div>`:''}</div>
+            <div class="ing-amount">${ing.amount}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="detail-section">
+        <h4>Instructions</h4>
+        ${r.instructions.map((step,i)=>`
+          <div class="step-item">
+            <div class="step-num">${i+1}</div>
+            <div class="step-text">${step}</div>
+          </div>
+        `).join('')}
+      </div>
+      ${r.tips&&r.tips.length?`
+      <div class="detail-section">
+        <h4>Tips</h4>
+        ${r.tips.map(t=>`<div class="tip-item">${t}</div>`).join('')}
+      </div>`:''}
+      ${r.cautions&&r.cautions.length?`
+      <div class="detail-section">
+        <h4>Cautions</h4>
+        ${r.cautions.map(c=>`<div class="caution-item">${c}</div>`).join('')}
+      </div>`:''}
+      <div style="margin-top:28px;padding-bottom:16px">
+        <button class="btn btn-outline btn-full" onclick="navBack()">&#8592; Back to Recipes</button>
+      </div>
+    </div>
+  `;
+  goPage('page-recipe-detail');
+}
+
+// ─── PLANT DETAIL ─────────────────────────────────────────────────────
+function showPlant(id) {
+  const p = PLANTS.find(x=>x.id===id);
+  if(!p) return;
+  const plantRecipes = RECIPES.filter(r=>r.plantIds.includes(p.id));
+  const content = document.getElementById('plant-detail-content');
+  content.innerHTML = `
+    <div class="plant-hero">
+      <span class="plant-emoji-lg">${p.emoji}</span>
+      <h1>${p.name}</h1>
+      <div class="cat-badge">${p.category}${p.skinType&&p.skinType!=='all'?` · Best for ${p.skinType} skin`:''}</div>
+      <p>${p.description}</p>
+      <div class="benefits-grid">
+        ${p.benefits.map(b=>`<span class="benefit-tag">${b}</span>`).join('')}
+      </div>
+    </div>
+    <div style="padding:24px">
+      ${plantRecipes.length?`
+        <div class="section-label" style="margin-bottom:14px">Recipes using ${p.name}</div>
+        ${plantRecipes.map(r=>`
+          <div class="recipe-card" onclick="showRecipe(${r.id})">
+            <span class="rtype ${getAreaCategory(r.areaId)}">${r.treatmentType}</span>
+            <h3>${r.title}</h3>
+            <p>${r.description}</p>
+          </div>
+        `).join('')}
+      `:'<div class="empty"><p>No recipes yet for this plant.</p></div>'}
+      <div style="margin-top:16px">
+        <button class="btn btn-outline btn-full" onclick="navBack()">&#8592; Back</button>
+      </div>
+    </div>
+  `;
+  goPage('page-plant-detail');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────
+renderHome();
+renderPlants();
+renderAreas();
+
+// Show hint on discover
+document.getElementById('discover-hint').style.display='block';
+
+// ─── CINEMATIC HERO SLIDESHOW ───────────────────────────────────────────
+(function(){
+  const slides = document.querySelectorAll('.cinehero-slide');
+  const dots = document.querySelectorAll('.cinehero-dot');
+  let current = 0;
+  const HOLD_MS = 5200; // how long each photo holds before crossfading
+
+  function goToSlide(i){
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    current = i % slides.length;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+  }
+
+  let timer = setInterval(()=>goToSlide(current+1), HOLD_MS);
+
+  dots.forEach((dot,i)=>{
+    dot.addEventListener('click', ()=>{
+      clearInterval(timer);
+      goToSlide(i);
+      timer = setInterval(()=>goToSlide(current+1), HOLD_MS);
+    });
+  });
+})();
+</script>
+</body>
+</html>
